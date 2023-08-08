@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+docs
+
+/.quarto/
+/_site/
+
+_freeze
