@@ -22,8 +22,19 @@ knitr::opts_chunk$set(
 
 rgl::setupKnitr(autoprint = TRUE)
 
-### publish -- quarto publish gh-pages
 ```
+
+## People
+
+Presenter: Tristan Goodbody (UBC)
+
+Assistants:
+
+- Alexandre Morin-Bernard (Laval)
+
+- Leanna Stackhouse (UBC)
+
+- Liam Irwin (UBC)
 
 ## Materials
 

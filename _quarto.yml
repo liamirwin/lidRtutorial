@@ -29,7 +29,7 @@ website:
         href: "07_engine.qmd"
       - text: "8-ENGINE"
         href: "08_engine2.qmd"
-      - text: "09-SOLUTIONS"
+      - text: "9-SOLUTIONS"
         href: "09_solutions.qmd"
   search: 
     location: navbar

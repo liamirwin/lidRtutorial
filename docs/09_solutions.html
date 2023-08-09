@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.0.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,16 +11,10 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +41,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -104,63 +128,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./img/logo.png" alt="" class="navbar-logo">
-    </a>
-    <a class="navbar-brand" href="./index.html">
+      <a class="navbar-brand" href="./index.html">
+    <img src="./img/logo.png" alt="">
     <span class="navbar-title">lidRtutorial</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
+  </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">README</span></a>
+    <a class="nav-link" href="./01_read.html">1-LAS</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./01_read.html" rel="" target="">
- <span class="menu-text">1-LAS</span></a>
+    <a class="nav-link" href="./02_roi.html">2-ROI</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./02_roi.html" rel="" target="">
- <span class="menu-text">2-ROI</span></a>
+    <a class="nav-link" href="./03_aba.html">3-ABA</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./03_aba.html" rel="" target="">
- <span class="menu-text">3-ABA</span></a>
+    <a class="nav-link" href="./04_chm.html">4-CHM</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./04_chm.html" rel="" target="">
- <span class="menu-text">4-CHM</span></a>
+    <a class="nav-link" href="./05_dtm.html">5-DTM</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./05_dtm.html" rel="" target="">
- <span class="menu-text">5-DTM</span></a>
+    <a class="nav-link" href="./06_its.html">6-ITS</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./06_its.html" rel="" target="">
- <span class="menu-text">6-ITS</span></a>
+    <a class="nav-link" href="./07_engine.html">7-LASCATALOG</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./07_engine.html" rel="" target="">
- <span class="menu-text">7-LASCATALOG</span></a>
+    <a class="nav-link" href="./08_engine2.html">8-ENGINE</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./08_engine2.html" rel="" target="">
- <span class="menu-text">8-ENGINE</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./09_solutions.html" rel="" target="" aria-current="page">
- <span class="menu-text">09-SOLUTIONS</span></a>
+    <a class="nav-link active" href="./09_solutions.html" aria-current="page">09-SOLUTIONS</a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
+              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -170,31 +175,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#las" id="toc-las" class="nav-link active" data-scroll-target="#las">1-LAS</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1." id="toc-e1." class="nav-link" data-scroll-target="#e1.">E1.</a></li>
   <li><a href="#e2." id="toc-e2." class="nav-link" data-scroll-target="#e2.">E2.</a></li>
   <li><a href="#e3." id="toc-e3." class="nav-link" data-scroll-target="#e3.">E3.</a></li>
   <li><a href="#e4." id="toc-e4." class="nav-link" data-scroll-target="#e4.">E4.</a></li>
   </ul></li>
   <li><a href="#roi" id="toc-roi" class="nav-link" data-scroll-target="#roi">2-ROI</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-1" id="toc-e1.-1" class="nav-link" data-scroll-target="#e1.-1">E1.</a></li>
   <li><a href="#e2.-1" id="toc-e2.-1" class="nav-link" data-scroll-target="#e2.-1">E2.</a></li>
   <li><a href="#e3.-1" id="toc-e3.-1" class="nav-link" data-scroll-target="#e3.-1">E3.</a></li>
   </ul></li>
   <li><a href="#aba" id="toc-aba" class="nav-link" data-scroll-target="#aba">3-ABA</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-2" id="toc-e1.-2" class="nav-link" data-scroll-target="#e1.-2">E1.</a></li>
   <li><a href="#e2.-2" id="toc-e2.-2" class="nav-link" data-scroll-target="#e2.-2">E2.</a></li>
   <li><a href="#e3.-2" id="toc-e3.-2" class="nav-link" data-scroll-target="#e3.-2">E3.</a></li>
   </ul></li>
   <li><a href="#dtm" id="toc-dtm" class="nav-link" data-scroll-target="#dtm">5-DTM</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-3" id="toc-e1.-3" class="nav-link" data-scroll-target="#e1.-3">E1.</a></li>
   <li><a href="#e2.-3" id="toc-e2.-3" class="nav-link" data-scroll-target="#e2.-3">E2.</a></li>
   <li><a href="#e3.-3" id="toc-e3.-3" class="nav-link" data-scroll-target="#e3.-3">E3.</a></li>
@@ -204,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#e7." id="toc-e7." class="nav-link" data-scroll-target="#e7.">E7.</a></li>
   </ul></li>
   <li><a href="#its" id="toc-its" class="nav-link" data-scroll-target="#its">6-ITS</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-4" id="toc-e1.-4" class="nav-link" data-scroll-target="#e1.-4">E1.</a></li>
   <li><a href="#e2.-4" id="toc-e2.-4" class="nav-link" data-scroll-target="#e2.-4">E2.</a></li>
   <li><a href="#e3.-4" id="toc-e3.-4" class="nav-link" data-scroll-target="#e3.-4">E3.</a></li>
@@ -212,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#e5.-1" id="toc-e5.-1" class="nav-link" data-scroll-target="#e5.-1">E5.</a></li>
   </ul></li>
   <li><a href="#lasctalog" id="toc-lasctalog" class="nav-link" data-scroll-target="#lasctalog">7-LASCTALOG</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-5" id="toc-e1.-5" class="nav-link" data-scroll-target="#e1.-5">E1.</a></li>
   <li><a href="#e2.-5" id="toc-e2.-5" class="nav-link" data-scroll-target="#e2.-5">E2.</a></li>
   <li><a href="#e3.-5" id="toc-e3.-5" class="nav-link" data-scroll-target="#e3.-5">E3.</a></li>
@@ -220,10 +225,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#e5.-2" id="toc-e5.-2" class="nav-link" data-scroll-target="#e5.-2">E5.</a></li>
   </ul></li>
   <li><a href="#engine" id="toc-engine" class="nav-link" data-scroll-target="#engine">8-ENGINE</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#e1.-6" id="toc-e1.-6" class="nav-link" data-scroll-target="#e1.-6">E1.</a></li>
   <li><a href="#e2.-6" id="toc-e2.-6" class="nav-link" data-scroll-target="#e2.-6">E2.</a></li>
-  <li><a href="#e3.-design-an-application-that-retrieves-the-convex-hull-of-each-flightline-hard.-use-the-concavemanconcaveman-function-adn-functions-from-sf.-start-by-designing-a-test-function-that-works-on-a-las-object-and-later-apply-on-the-collection.-the-output-should-look-like" id="toc-e3.-design-an-application-that-retrieves-the-convex-hull-of-each-flightline-hard.-use-the-concavemanconcaveman-function-adn-functions-from-sf.-start-by-designing-a-test-function-that-works-on-a-las-object-and-later-apply-on-the-collection.-the-output-should-look-like" class="nav-link" data-scroll-target="#e3.-design-an-application-that-retrieves-the-convex-hull-of-each-flightline-hard.-use-the-concavemanconcaveman-function-adn-functions-from-sf.-start-by-designing-a-test-function-that-works-on-a-las-object-and-later-apply-on-the-collection.-the-output-should-look-like">E3. Design an application that retrieves the convex hull of each flightline (hard). Use the <code>concaveman::concaveman()</code> function, adn functions from <code>sf</code>. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:</a></li>
+  <li><a href="#e3.-6" id="toc-e3.-6" class="nav-link" data-scroll-target="#e3.-6">E3.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -241,13 +246,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-  
     
   </div>
   
 
 </header>
 
+<div class="cell">
+
+</div>
 <section id="las" class="level2">
 <h2 class="anchored" data-anchor-id="las">1-LAS</h2>
 <div class="cell" data-layout-align="center">
@@ -682,89 +689,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">las_check</span>(las)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking the data</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates...[0;32m ✓[0m</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates type...[0;32m ✓[0m</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates range...[0;32m ✓[0m</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates quantization...[0;32m ✓[0m</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes type...[0;32m ✓[0m</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber validity...[0;32m ✓[0m</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking NumberOfReturns validity...[0;32m ✓[0m</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber vs. NumberOfReturns...[0;32m ✓[0m</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking RGB validity...[0;32m ✓[0m</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking absence of NAs...[0;32m ✓[0m</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates... ✓</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates type... ✓</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates range... ✓</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates quantization... ✓</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes type... ✓</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber validity... ✓</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking NumberOfReturns validity... ✓</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber vs. NumberOfReturns... ✓</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking RGB validity... ✓</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking absence of NAs... ✓</span></span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking duplicated points...</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1;33m   ⚠ 202348 points are duplicated and share XYZ coordinates with other points[0m</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking degenerated ground points...[0;37m skipped[0m</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute population...[0;32m ✓[0m</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking gpstime incoherances[0;37m skipped[0m</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flag attributes...[0;32m ✓[0m</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking user data attribute...[0;37m skipped[0m</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ⚠ 202348 points are duplicated and share XYZ coordinates with other points</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking degenerated ground points... skipped</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute population... ✓</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking gpstime incoherances skipped</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flag attributes... ✓</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking user data attribute... skipped</span></span>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking the header</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header completeness...[0;32m ✓[0m</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking scale factor validity...[0;32m ✓[0m</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking point data format ID validity...[0;32m ✓[0m</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking extra bytes attributes validity...[0;32m ✓[0m</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking the bounding box validity...[0;32m ✓[0m</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinate reference system...[0;32m ✓[0m</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header completeness... ✓</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking scale factor validity... ✓</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking point data format ID validity... ✓</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking extra bytes attributes validity... ✓</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking the bounding box validity... ✓</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinate reference system... ✓</span></span>
 <span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking header vs data adequacy</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes vs. point format...[0;32m ✓[0m</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header bbox vs. actual content...[0;32m ✓[0m</span></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header number of points vs. actual content...[0;32m ✓[0m</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header return number vs. actual content...[0;32m ✓[0m</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes vs. point format... ✓</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header bbox vs. actual content... ✓</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header number of points vs. actual content... ✓</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header return number vs. actual content... ✓</span></span>
 <span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking coordinate reference system...</span></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking if the CRS was understood by R...[0;32m ✓[0m</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking if the CRS was understood by R... ✓</span></span>
 <span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking preprocessing already done </span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ground classification...[0;37m skipped[0m</span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking normalization...[0;32m yes[0m</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ground classification... skipped</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking normalization... yes</span></span>
 <span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking negative outliers...</span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1;33m   ⚠ 77 points below 0[0m</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flightline classification...[0;37m skipped[0m</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ⚠ 77 points below 0</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flightline classification... skipped</span></span>
 <span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking compression</span></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute compression...[0;31m no[0m</span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute compression... no</span></span>
 <span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>las <span class="ot">&lt;-</span> <span class="fu">filter_duplicates</span>(<span class="at">las =</span> las)</span>
 <span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="fu">las_check</span>(las)</span>
 <span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking the data</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates...[0;32m ✓[0m</span></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates type...[0;32m ✓[0m</span></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates range...[0;32m ✓[0m</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates quantization...[0;32m ✓[0m</span></span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes type...[0;32m ✓[0m</span></span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber validity...[0;32m ✓[0m</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking NumberOfReturns validity...[0;32m ✓[0m</span></span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber vs. NumberOfReturns...[0;32m ✓[0m</span></span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking RGB validity...[0;32m ✓[0m</span></span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking absence of NAs...[0;32m ✓[0m</span></span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking duplicated points...[0;32m ✓[0m</span></span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking degenerated ground points...[0;37m skipped[0m</span></span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute population...[0;32m ✓[0m</span></span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking gpstime incoherances[0;37m skipped[0m</span></span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flag attributes...[0;32m ✓[0m</span></span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking user data attribute...[0;37m skipped[0m</span></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates... ✓</span></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates type... ✓</span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates range... ✓</span></span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinates quantization... ✓</span></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes type... ✓</span></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber validity... ✓</span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking NumberOfReturns validity... ✓</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ReturnNumber vs. NumberOfReturns... ✓</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking RGB validity... ✓</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking absence of NAs... ✓</span></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking duplicated points... ✓</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking degenerated ground points... skipped</span></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute population... ✓</span></span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking gpstime incoherances skipped</span></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flag attributes... ✓</span></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking user data attribute... skipped</span></span>
 <span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking the header</span></span>
-<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header completeness...[0;32m ✓[0m</span></span>
-<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking scale factor validity...[0;32m ✓[0m</span></span>
-<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking point data format ID validity...[0;32m ✓[0m</span></span>
-<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking extra bytes attributes validity...[0;32m ✓[0m</span></span>
-<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking the bounding box validity...[0;32m ✓[0m</span></span>
-<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinate reference system...[0;32m ✓[0m</span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header completeness... ✓</span></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking scale factor validity... ✓</span></span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking point data format ID validity... ✓</span></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking extra bytes attributes validity... ✓</span></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking the bounding box validity... ✓</span></span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking coordinate reference system... ✓</span></span>
 <span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking header vs data adequacy</span></span>
-<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes vs. point format...[0;32m ✓[0m</span></span>
-<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header bbox vs. actual content...[0;32m ✓[0m</span></span>
-<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header number of points vs. actual content...[0;32m ✓[0m</span></span>
-<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header return number vs. actual content...[0;32m ✓[0m</span></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attributes vs. point format... ✓</span></span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header bbox vs. actual content... ✓</span></span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header number of points vs. actual content... ✓</span></span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking header return number vs. actual content... ✓</span></span>
 <span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking coordinate reference system...</span></span>
-<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking if the CRS was understood by R...[0;32m ✓[0m</span></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking if the CRS was understood by R... ✓</span></span>
 <span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking preprocessing already done </span></span>
-<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ground classification...[0;37m skipped[0m</span></span>
-<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking normalization...[0;32m yes[0m</span></span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking ground classification... skipped</span></span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking normalization... yes</span></span>
 <span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking negative outliers...</span></span>
-<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1;33m   ⚠ 41 points below 0[0m</span></span>
-<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flightline classification...[0;37m skipped[0m</span></span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ⚠ 41 points below 0</span></span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking flightline classification... skipped</span></span>
 <span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Checking compression</span></span>
-<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute compression...[0;31m no[0m</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   - Checking attribute compression... no</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1211,8 +1218,9 @@ las &lt;- readLAS(output)
 plot(las)</code></pre>
 </div>
 </section>
-<section id="e3.-design-an-application-that-retrieves-the-convex-hull-of-each-flightline-hard.-use-the-concavemanconcaveman-function-adn-functions-from-sf.-start-by-designing-a-test-function-that-works-on-a-las-object-and-later-apply-on-the-collection.-the-output-should-look-like" class="level4">
-<h4 class="anchored" data-anchor-id="e3.-design-an-application-that-retrieves-the-convex-hull-of-each-flightline-hard.-use-the-concavemanconcaveman-function-adn-functions-from-sf.-start-by-designing-a-test-function-that-works-on-a-las-object-and-later-apply-on-the-collection.-the-output-should-look-like">E3. Design an application that retrieves the convex hull of each flightline (hard). Use the <code>concaveman::concaveman()</code> function, adn functions from <code>sf</code>. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:</h4>
+<section id="e3.-6" class="level4">
+<h4 class="anchored" data-anchor-id="e3.-6">E3.</h4>
+<p>Design an application that retrieves the convex hull of each flightline (hard). Use the <code>concaveman::concaveman()</code> function, adn functions from <code>sf</code>. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>flightlines <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/flightlines.shp"</span>)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading layer `flightlines' from data source </span></span>
@@ -1394,23 +1402,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -1422,24 +1416,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1467,136 +1444,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      let href = ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script>

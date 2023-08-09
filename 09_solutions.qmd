@@ -490,7 +490,9 @@ las <- readLAS(output)
 plot(las)
 ```
 
-#### E3. Design an application that retrieves the convex hull of each flightline (hard). Use the `concaveman::concaveman()` function, adn functions from `sf`. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:
+#### E3. 
+
+Design an application that retrieves the convex hull of each flightline (hard). Use the `concaveman::concaveman()` function, adn functions from `sf`. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:
 
 ```{r}
 flightlines <- st_read("data/flightlines.shp")
