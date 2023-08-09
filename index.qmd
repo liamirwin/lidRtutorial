@@ -32,6 +32,8 @@ This repository contains the material for a \~3 hour `lidR` tutorial workshop. Y
 -   Present an overview of what can be done with `lidR`
 -   Give users an understanding of how `lidR` may fit their needs
 
+Find the code, exercises, and solutions used in the `.\code` sub-directory.
+
 ## Requirements
 
 ### R version and Rstudio

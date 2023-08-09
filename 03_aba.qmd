@@ -28,19 +28,19 @@ rgl::setupKnitr(autoprint = TRUE)
 
 This code demonstrates an area-based approach for LiDAR data. Basic usage involves computing mean and max height of points within 10x10 m pixels and visualizing the results. The code shows how to compute multiple metrics simultaneously and use predefined metric sets. Advanced usage introduces user-defined metrics for more specialized calculations.
 
-## Basic Usage
+## Environment
 
-We start by loading the necessary libraries, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer.
-
-```{r clear_warnings, warnings = FALSE, message = FALSE}
+```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings" = "none")
+options("rgdal_show_exportToProj4_warnings"="none")
 
 # Load libraries
 library(lidR)
 library(sf)
 ```
+
+## Basic Usage
 
 We'll cover the basic usage of the `lidR` package to compute metrics from LiDAR data.
 
@@ -117,4 +117,4 @@ Map pixels that are flat (planar) using `stdshapemetrics`. These could indicate 
 
 ## Conclusion
 
-In this tutorial, we covered basic usage of the `lidR` package for computing mean and max heights within grid cells and using predefined sets of metrics. Additionally, we explored the advanced usage with the ability to define user-specific metrics for grid computation. The code chunks are well-labeled to help the audience navigate through the tutorial easily.
+In this tutorial, we covered basic usage of the `lidR` package for computing mean and max heights within grid cells and using predefined sets of metrics. Additionally, we explored the advanced usage with the ability to define user-specific metrics for grid computation.

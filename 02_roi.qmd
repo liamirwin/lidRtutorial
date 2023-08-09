@@ -28,7 +28,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 This code demonstrates the selection of regions of interest from LiDAR data. Simple geometries like circles and rectangles are selected based on coordinates. Complex geometries are extracted from shapefiles to clip specific areas.
 
-## Simple Geometries
+## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
@@ -39,6 +39,8 @@ options("rgdal_show_exportToProj4_warnings"="none")
 library(lidR)
 library(sf)
 ```
+
+## Simple Geometries
 
 ### Load LiDAR Data and Inspect
 
@@ -168,4 +170,4 @@ Clip a transect from A `c(203850, 7358950)` to B `c(203950, 7959000)` but reorie
 
 ## Conclusion
 
-This concludes our tutorial on selecting simple geometries and extracting complex geometries from shapefiles using the `lidR` package in R. The code snippets are labeled for easy reference in the tutorial.
+This concludes our tutorial on selecting simple geometries and extracting complex geometries from shapefiles using the `lidR` package in R.

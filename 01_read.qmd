@@ -34,11 +34,9 @@ We'll use the `select` argument in `readLAS()` to load specific attributes and t
 
 Let's get started with processing LiDAR data efficiently using `lidR` and R! Happy learning!
 
-## Basic Usage
+## Environment
 
-### Load and Inspect LiDAR Data
-
-We start by loading the necessary libraries, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer.
+We start by loading the necessary libraries, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer. We will do this for each section in the tutorial.
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
@@ -49,6 +47,10 @@ options("rgdal_show_exportToProj4_warnings" = "none")
 library(lidR)
 library(sf)
 ```
+
+## Basic Usage
+
+### Load and Inspect LiDAR Data
 
 Load the LiDAR point cloud data from a LAS file using the `readLAS()` function. The data is stored in the `las` object. We can inspect the header information and attributes of the `las` object.
 
@@ -235,12 +237,12 @@ Read the file dropping withheld points.
 
 #### E3.
 
-The withheld points seem to be legitimate points that we want to keep. Try to load the file including the withheld points but get rid of the warning (without using suppressWarnings()). Hint: Check available '-set_withheld' filters in readLAS(filter = "-h")
+The withheld points seem to be legitimate points that we want to keep. Try to load the file including the withheld points but get rid of the warning (without using `suppressWarnings()`). Hint: Check available `-set_withheld` filters using `readLAS(filter = "-h")`.
 
 #### E4.
 
-Load only the ground points and plot the point cloud colored by the return number of the point. Do it loading the strict minimal amount of memory (4.7 Mb). Hint: use ?lidR::readLAS and see what 'select' options might help.
+Load only the ground points and plot the point cloud colored by the return number of the point. Do it loading the strict minimal amount of memory (4.7 Mb). Hint: use `?lidR::readLAS` and see what `select` options might help.
 
 ## Conclusion
 
-This concludes our tutorial on the basic usage of the `lidR` package in R for processing and analyzing LiDAR data. We covered loading LiDAR data, inspecting and visualizing the data, selecting specific attributes, filtering points, and validating LAS objects for issues. The code snippets are labeled for easy reference in the tutorial.
+This concludes our tutorial on the basic usage of the `lidR` package in R for processing and analyzing LiDAR data. We covered loading LiDAR data, inspecting and visualizing the data, selecting specific attributes, filtering points, and validating LAS objects for issues.

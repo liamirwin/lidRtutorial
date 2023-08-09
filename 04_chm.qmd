@@ -26,9 +26,9 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## Overview
 
-This code demonstrates the creation of a Canopy Height Model (CHM) using LiDAR data. It shows different algorithms for generating CHMs and provides options for adjusting resolution, subcircle size, and filling empty pixels.
+This code demonstrates the creation of a Canopy Height Model (CHM) using LiDAR data. It shows different algorithms for generating CHMs and provides options for adjusting resolution, sub-circle size, and filling empty pixels.
 
-## Data Preprocessing
+## Environment
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
@@ -40,6 +40,8 @@ library(lidR)
 library(microbenchmark)
 library(terra)
 ```
+
+## Data Preprocessing
 
 In this section, we load the LiDAR data, set a random fraction filter to reduce point density, and visualize the resulting LiDAR point cloud.
 

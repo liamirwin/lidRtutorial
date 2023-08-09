@@ -28,9 +28,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 This code performs various operations on LiDAR data using LAScatalog functionality. We visualize and inspect the data, validate the files, clip the data based on specific coordinates, and generate a Canopy Height Model (CHM), compute Above Ground Biomass (ABA) output, detect treetops, specify processing options, and use parallel computing.
 
-## Basic Usage
-
-In this section, we will cover the basic usage of the `lidR` package, including reading LiDAR data, visualization, and inspecting metadata. We start by loading the necessary libraries, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer.
+## Environment
 
 ```{r clear_warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
@@ -41,6 +39,10 @@ options("rgdal_show_exportToProj4_warnings"="none")
 library(lidR)
 library(sf)
 ```
+
+## Basic Usage
+
+In this section, we will cover the basic usage of the `lidR` package, including reading LiDAR data, visualization, and inspecting metadata.
 
 ### Read catalog from directory of files
 
@@ -60,7 +62,7 @@ ctg
 
 ### Visualize catalog
 
-We visualize the catalog, showing the spatial coverage of the LiDAR data _header_ extents. The map can be interactive if we use `map = TRUE`. Try clicking on a tile to see its header information.
+We visualize the catalog, showing the spatial coverage of the LiDAR data *header* extents. The map can be interactive if we use `map = TRUE`. Try clicking on a tile to see its header information.
 
 ```{r visualize_catalog}
 plot(ctg)
@@ -399,21 +401,21 @@ Using:
 
 `ctg <- readLAScatalog(folder = "data/Farm_A/")`
 
-#### E1. 
+#### E1.
 
 Generate a raster of point density for the provided catalog. Hint: Look through the documentation for a function that will do this!
 
-#### E2. 
+#### E2.
 
 Modify the catalog to have a point density of 10 pts/m2 using the `decimate_points()` function. If you get an error make sure to read the documentation for `decimate_points()` and try: using `opt_output_file()` to write files to a temporary directory.
 
-#### E3. 
+#### E3.
 
 Generate a raster of point density for this new decimated dataset.
 
-#### E4. 
+#### E4.
 
-Read the whole decimated catalog as a single las file. The catalog isn't very big - not recommended for larger datasets!
+Read the whole decimated catalog as a single `las` file. The catalog isn't very big - not recommended for larger datasets!
 
 #### E5.
 

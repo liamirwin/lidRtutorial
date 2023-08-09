@@ -28,9 +28,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 This tutorial explores the creation of a Digital Terrain Model (DTM) from LiDAR data. It demonstrates two algorithms for DTM generation, ground point triangulation, and inverse-distance weighting. Additionally, the tutorial showcases DTM-based normalization and point-based normalization, accompanied by exercises for hands-on practice.
 
-## DTM (Digital Terrain Model)
-
-In this section, we'll generate a Digital Terrain Model (DTM) from LiDAR data using two different algorithms: `tin()` and `knnidw()`.
+## Environment
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
@@ -40,6 +38,10 @@ options("rgdal_show_exportToProj4_warnings" = "none")
 # Load libraries
 library(lidR)
 ```
+
+## DTM (Digital Terrain Model)
+
+In this section, we'll generate a Digital Terrain Model (DTM) from LiDAR data using two different algorithms: `tin()` and `knnidw()`.
 
 ### Data Preprocessing
 
@@ -52,15 +54,23 @@ Here, we load the LiDAR data and exclude non-ground points flagged with the with
 
 ### Visualizing LiDAR Data
 
-```{r dtm_visualize_data}
-# Visualize the LiDAR data and ground points
+``` r
 plot(las)
+```
+
+```{r dtm_visualize_data, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize using the classification attribute as colors
+plot(las, bg = "white")
 ```
 
 We start by visualizing the entire LiDAR point cloud to get an initial overview.
 
-```{r dtm_visualize_data_bg}
-# Visualize the LiDAR data with ground points highlighted against a white background
+``` r
+plot(las, color = "Classification")
+```
+
+```{r dtm_visualize_data_bg, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize using the classification attribute as colors
 plot(las, color = "Classification", bg = "white")
 ```
 
@@ -77,19 +87,30 @@ We create a DTM using the TIN algorithm with a specified resolution.
 
 ### Visualizing DTM in 3D
 
-```{r dtm_visualize_3d}
+``` r
 # Visualize the DTM in 3D
 plot_dtm3d(dtm_tin)
+```
+
+```{r dtm_visualize_3d, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize the DTM in 3D
+plot_dtm3d(dtm_tin, bg = "white")
 ```
 
 To better understand the terrain, we visualize the generated DTM in a 3D plot.
 
 ### Visualizing DTM with LiDAR Data
 
-```{r dtm_visualize_with_lidar}
+``` r
 # Visualize the LiDAR data with the overlaid DTM in 3D
 x <- plot(las, bg = "white")
-add_dtm3d(x, dtm_tin)
+add_dtm3d(x, dtm_tin, bg = "white")
+```
+
+```{r dtm_visualize_with_lidar, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize the LiDAR data with the overlaid DTM in 3D
+x <- plot(las, bg = "white")
+add_dtm3d(x, dtm_tin, bg = "white")
 ```
 
 We overlay the DTM on the LiDAR data for a more comprehensive view of the terrain.
@@ -105,9 +126,14 @@ Next, we generate a DTM using the IDW algorithm to compare results with the TIN-
 
 ### Visualizing IDW-based DTM in 3D
 
-```{r dtm_visualize_idw_3d}
+``` r
 # Visualize the IDW-based DTM in 3D
 plot_dtm3d(dtm_idw)
+```
+
+```{r dtm_visualize_idw_3d, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize the IDW-based DTM in 3D
+plot_dtm3d(dtm_idw, bg = "white")
 ```
 
 We visualize the DTM generated using the IDW algorithm in a 3D plot.
@@ -127,7 +153,12 @@ We perform DTM-based normalization on the LiDAR data using the previously genera
 
 ### Visualizing Normalized LiDAR Data
 
-```{r normalization_visualize}
+``` r
+# Visualize the normalized LiDAR data
+plot(nlas_dtm)
+```
+
+```{r normalization_visualize, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the normalized LiDAR data
 plot(nlas_dtm, bg = "white")
 ```
@@ -145,7 +176,12 @@ We filter the normalized data to keep only the ground points.
 
 ### Visualizing Filtered Ground Points
 
-```{r normalization_visualize_filtered_ground}
+``` r
+# Visualize the filtered ground points
+plot(gnd_dtm)
+```
+
+```{r normalization_visualize_filtered_ground, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the filtered ground points
 plot(gnd_dtm, bg = "white")
 ```
@@ -190,7 +226,12 @@ We filter the normalized data (TIN-based) to keep only the ground points.
 
 ### Visualizing Filtered Ground Points (TIN-based)
 
-```{r normalization_visualize_filtered_ground_tin}
+``` r
+# Visualize the filtered ground points after TIN-based normalization
+plot(gnd_tin)
+```
+
+```{r normalization_visualize_filtered_ground_tin, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the filtered ground points after TIN-based normalization
 plot(gnd_tin, bg = "white")
 ```
@@ -214,7 +255,7 @@ A histogram illustrates the distribution of normalized ground points' height aft
 
 Plot and compare these two normalized point-clouds. Why do they look different? Fix that. Hint: `filter`.
 
-```r
+``` r
 # Load and visualize nlas1 and nlas2
 las1 = readLAS("data/MixedEucaNat.laz", filter = "-set_withheld_flag 0")
 nlas1 = normalize_height(las1, tin())
@@ -239,7 +280,7 @@ Compute a DSM (digital surface model). Hint: Look back to how you made a CHM.
 
 Normalize the plot.
 
-#### E6. 
+#### E6.
 
 Compute a CHM.
 

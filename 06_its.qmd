@@ -28,7 +28,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 This code demonstrates individual tree segmentation (ITS) using LiDAR data. It covers CHM-based and point-cloud-based methods for tree detection and segmentation. The code also shows how to extract metrics at the tree level and visualize them.
 
-## Data preprocessing
+## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
@@ -85,7 +85,7 @@ The detected tree tops (`ttops`) are plotted on top of the CHM (`chm`) to visual
 
 Now, we perform tree segmentation using the detected tree tops. The `segment_trees` function segments the trees in the LiDAR point cloud based on the previously detected tree tops.
 
-```r
+``` r
 las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = ttops))
 ```
 
@@ -98,7 +98,7 @@ las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = 
 length(unique(las@data$treeID) |> na.omit())
 ```
 
-```r
+``` r
 # Visualize all trees
 plot(las, color = "treeID")
 ```
@@ -157,7 +157,7 @@ We begin with tree detection using the local maxima filtering (lmf) algorithm. T
 ttops <- locate_trees(las = las, algorithm = lmf(ws = 3, hmin = 5))
 ```
 
-```r
+``` r
 x <- plot(las)
 add_treetops3d(x = x, ttops = ttops, radius = 0.5)
 ```
@@ -173,7 +173,7 @@ We detect tree tops using the `lmf` algorithm and visualize them in 3D by adding
 
 Next, we perform tree segmentation using the `li2012` algorithm, which directly processes the LiDAR point cloud.
 
-```r
+``` r
 las <- segment_trees(las = las, algorithm = li2012())
 ```
 
@@ -181,7 +181,7 @@ las <- segment_trees(las = las, algorithm = li2012())
 las <- segment_trees(las = las, algorithm = li2012())
 ```
 
-```r
+``` r
 plot(las, color = "treeID")
 # This algorithm does not seem pertinent for this dataset.
 ```
@@ -269,7 +269,7 @@ We use `delineate_crowns()` with the `.stdtreemetrics` function to segment trees
 
 # Using:
 
-```r
+``` r
 las <- readLAS(files = "data/example_corrupted.laz", select = "xyz")
 ```
 

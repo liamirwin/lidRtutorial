@@ -22,17 +22,15 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## Relevant resources:
 
-- [lidRbook section: Engine](https://r-lidar.github.io/lidRbook/engine2.html)
+-   [lidRbook section: Engine](https://r-lidar.github.io/lidRbook/engine2.html)
 
-- [lidRbook section: Thinking outside the box](https://r-lidar.github.io/lidRbook/outbox.html)
+-   [lidRbook section: Thinking outside the box](https://r-lidar.github.io/lidRbook/outbox.html)
 
 ## Overview
 
 This code showcases the LASCATALOG PROCESSING ENGINE, which efficiently and in parallel applies various functions to LiDAR catalogs. It introduces the `catalog_apply()` function for processing LiDAR data in a catalog. The code includes routines to detect trees and calculate metrics on the LiDAR catalog.
 
-## Basic Usage
-
-In this section, we will cover the basic usage of the `lidR` package, including reading LiDAR data, visualization, and inspecting metadata. We start by loading the necessary libraries, clear our current environment, and specify that some warnings be turned off to make our outputs clearer.
+## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
@@ -44,6 +42,10 @@ library(lidR)
 library(terra)
 library(future)
 ```
+
+## Basic Usage
+
+In this section, we will cover the basic usage of the `lidR` package, including reading LiDAR data, visualization, and inspecting metadata.
 
 ### Basic Usage of `lidR` Package
 
@@ -191,7 +193,7 @@ In this section, we provide another example of using the `catalog_apply()` funct
 
 We define a routine that detects trees, calculates metrics, and
 
- returns relevant data.
+returns relevant data.
 
 ```{r tree_detection_metrics}
 # User-defined routine for tree detection and metrics
@@ -239,35 +241,35 @@ future::plan(sequential)
 
 ## Exercises
 
-#### E1. 
+#### E1.
 
 Understanding Chunk Filtering
 
-In example 2 (section B), the line `m <- m[m$treeID %in% p$treeID,]` is used. Explain the purpose of this line. To understand its impact, modify the function to exclude this line and observe the results. You can use the `catalog_select()` function to choose a subset of tiles for testing.
+On line 111 (routine_trees function) `m <- m[m$treeID %in% p$treeID,]` is used. Explain the purpose of this line. To understand its impact, modify the function to exclude this line and observe the results. You can use the `catalog_select()` function to choose a subset of tiles for testing.
 
-```r
+``` r
 subctg <- catalog_select(ctg)
 ```
 
-#### E2. 
+#### E2.
 
 Implement Noise Filtering
 
-  - Explain the purpose of the `filter_noise()` function.
-  - Create a user-defined function to apply noise filtering using the `catalog_apply()` function.
-  - Make sure to consider buffered points when using lidR's `filter_*` functions.
+-   Explain the purpose of the `filter_noise()` function.
+-   Create a user-defined function to apply noise filtering using the `catalog_apply()` function.
+-   Make sure to consider buffered points when using lidR's `filter_*` functions.
 
-#### E3. 
+#### E3.
 
 Flightline Convex Hull Application
 
 Design an application to retrieve the convex hull of each flightline using the `concaveman::concaveman()` function and functions from the `sf` package.
 
-  - Begin by designing a test function that works on a single LAS object.
-  - Apply the function to a collection of LAS files.
-  - Visualize the results using the flightlines' shapefile.
+-   Begin by designing a test function that works on a single LAS object.
+-   Apply the function to a collection of LAS files.
+-   Visualize the results using the flightlines' shapefile.
 
-```r
+``` r
 flightlines <- st_read("data/flightlines.shp")
 plot(flightlines, col = sf.colors(6, alpha = 0.5))
 plot(flightlines[3,])
@@ -275,4 +277,4 @@ plot(flightlines[3,])
 
 ## Conclusion
 
-This concludes the tutorial on using the `catalog_apply` function in the `lidR` package to efficiently process LAS data within a catalog. 
+This concludes the tutorial on using the `catalog_apply` function in the `lidR` package to efficiently process LAS data within a catalog.

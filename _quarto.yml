@@ -13,8 +13,6 @@ website:
     type: light
     logo: "img/logo.png"
     left:
-      - href: index.qmd
-        text: README
       - text: "1-LAS"
         href: "01_read.qmd"
       - text: "2-ROI"
@@ -31,6 +29,8 @@ website:
         href: "07_engine.qmd"
       - text: "8-ENGINE"
         href: "08_engine2.qmd"
+      - text: "09-SOLUTIONS"
+        href: "09_solutions.qmd"
   search: 
     location: navbar
     type: overlay
@@ -41,5 +41,6 @@ format:
     css: [assets/custom.css]
     toc: true
     toc-depth: 4
+    code-overflow: wrap
 
 editor: visual
