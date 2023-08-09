@@ -283,9 +283,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">metrics =</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="at">func =</span> <span class="sc">~</span><span class="fu">max</span>(Z), <span class="at">res =</span> <span class="dv">1</span>),</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">times =</span> <span class="dv">10</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Unit: milliseconds</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     expr      min       lq     mean    median       uq      max neval</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   canopy  31.0048  31.7076  39.7157  34.67915  40.9132  64.7763    10</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  metrics 104.9672 118.1141 130.0458 128.59840 138.7499 168.5977    10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     expr      min       lq     mean   median       uq      max neval</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   canopy  31.5159  32.0307  36.0908  33.5248  37.9090  53.6060    10</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  metrics 102.6356 105.6102 128.4827 121.4485 146.0223 187.8858    10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code chunk uses <code>microbenchmark::microbenchmark()</code> to compare the performance of the <code>grid_canopy()</code> function with <code>p2r()</code> algorithm and <code>pixel_metrics()</code> function with <code>max(Z)</code> for maximum height computation. It demonstrates that the <code>grid_canopy()</code> function is optimized for generating CHMs.</p>
 <div class="cell" data-layout-align="center">
