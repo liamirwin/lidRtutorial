@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r-lidar.github.io/lidRbook/index.html</loc>
-    <lastmod>2023-08-09T20:09:58.219Z</lastmod>
+    <loc>https://r-lidar.github.io/lidRbook/01_read.html</loc>
+    <lastmod>2023-08-09T20:24:12.816Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/02_roi.html</loc>
-    <lastmod>2023-08-09T20:10:29.002Z</lastmod>
+    <lastmod>2023-08-09T20:24:27.726Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/03_aba.html</loc>
-    <lastmod>2023-08-09T20:11:32.691Z</lastmod>
+    <lastmod>2023-08-09T20:24:41.098Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/04_chm.html</loc>
-    <lastmod>2023-08-09T19:54:05.425Z</lastmod>
+    <lastmod>2023-08-09T20:25:04.028Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/05_dtm.html</loc>
-    <lastmod>2023-08-09T19:54:49.899Z</lastmod>
+    <lastmod>2023-08-09T20:25:47.810Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/06_its.html</loc>
-    <lastmod>2023-08-09T19:55:49.907Z</lastmod>
+    <lastmod>2023-08-09T20:26:49.044Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/07_engine.html</loc>
-    <lastmod>2023-08-09T20:01:59.481Z</lastmod>
+    <lastmod>2023-08-09T20:32:51.628Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/08_engine2.html</loc>
-    <lastmod>2023-08-09T20:04:55.947Z</lastmod>
+    <lastmod>2023-08-09T20:35:47.750Z</lastmod>
   </url>
   <url>
     <loc>https://r-lidar.github.io/lidRbook/09_solutions.html</loc>
-    <lastmod>2023-08-09T20:17:28.407Z</lastmod>
+    <lastmod>2023-08-09T20:40:47.248Z</lastmod>
   </url>
   <url>
-    <loc>https://r-lidar.github.io/lidRbook/01_read.html</loc>
-    <lastmod>2023-08-09T20:10:21.835Z</lastmod>
+    <loc>https://r-lidar.github.io/lidRbook/index.html</loc>
+    <lastmod>2023-08-09T20:40:49.767Z</lastmod>
   </url>
 </urlset>
