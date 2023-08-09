@@ -26,15 +26,15 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## People
 
-Presenter: Tristan Goodbody (UBC)
+**Presenter:** Tristan Goodbody (UBC)
 
-Assistants:
+**Assistants:**
 
-- Alexandre Morin-Bernard (Laval)
+-   Alexandre Morin-Bernard (Laval)
 
-- Leanna Stackhouse (UBC)
+-   Leanna Stackhouse (UBC)
 
-- Liam Irwin (UBC)
+-   Liam Irwin (UBC)
 
 ## Materials
 
