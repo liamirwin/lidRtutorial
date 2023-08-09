@@ -22,6 +22,8 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## Relevant Resources
 
+[Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/02_roi.R)
+
 [lidRbook](https://r-lidar.github.io/lidRbook/engine.html#engine-clip)
 
 ## Overview

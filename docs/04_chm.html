@@ -214,6 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="relevant-resources" class="level2">
 <h2 class="anchored" data-anchor-id="relevant-resources">Relevant Resources</h2>
+<p><a href="https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/04_chm.R">Code</a></p>
 <p><a href="https://r-lidar.github.io/lidRbook/chm.html">lidRbook Section</a></p>
 </section>
 <section id="overview" class="level2">
@@ -283,9 +284,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">metrics =</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="at">func =</span> <span class="sc">~</span><span class="fu">max</span>(Z), <span class="at">res =</span> <span class="dv">1</span>),</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">times =</span> <span class="dv">10</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Unit: milliseconds</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     expr      min       lq     mean   median       uq      max neval</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   canopy  31.5159  32.0307  36.0908  33.5248  37.9090  53.6060    10</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  metrics 102.6356 105.6102 128.4827 121.4485 146.0223 187.8858    10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     expr      min       lq      mean    median       uq      max neval</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   canopy  33.7091  34.5784  38.04501  35.61805  40.8934  45.3348    10</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  metrics 102.6751 111.7159 123.38166 115.75760 129.1620 186.2552    10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code chunk uses <code>microbenchmark::microbenchmark()</code> to compare the performance of the <code>grid_canopy()</code> function with <code>p2r()</code> algorithm and <code>pixel_metrics()</code> function with <code>max(Z)</code> for maximum height computation. It demonstrates that the <code>grid_canopy()</code> function is optimized for generating CHMs.</p>
 <div class="cell" data-layout-align="center">

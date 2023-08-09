@@ -22,6 +22,8 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## Relevant resources
 
+[Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/05_dtm.R)
+
 [lidRbook section](https://r-lidar.github.io/lidRbook/dtm.html)
 
 ## Overview

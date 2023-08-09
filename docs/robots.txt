@@ -1,1 +1,1 @@
-Sitemap: https://tgoodbody.github.io/lidRtutorial/sitemap.xml
+Sitemap: https://r-lidar.github.io/lidRbook/sitemap.xml

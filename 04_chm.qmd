@@ -22,6 +22,8 @@ rgl::setupKnitr(autoprint = TRUE)
 
 ## Relevant Resources
 
+[Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/04_chm.R)
+
 [lidRbook Section](https://r-lidar.github.io/lidRbook/chm.html)
 
 ## Overview

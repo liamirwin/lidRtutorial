@@ -20,6 +20,10 @@ knitr::opts_chunk$set(
 rgl::setupKnitr(autoprint = TRUE)
 ```
 
+## Resources
+
+[Code](https://github.com/tgoodbody/lidRtutorial/tree/main/code/solutions)
+
 ## 1-LAS
 
 ```{r, warning=FALSE, message=FALSE}
@@ -28,7 +32,7 @@ library(sf)
 library(terra)
 ```
 
-#### E1. 
+#### E1.
 
 What are withheld points? Where are they in our pointcloud?
 
@@ -46,7 +50,7 @@ las <- readLAS("data/MixedEucaNat_normalized.laz", filter = "-drop_withheld")
 plot(las)
 ```
 
-#### E3. 
+#### E3.
 
 The withheld points seem to be legitimate points that we want to keep.
 
@@ -58,7 +62,7 @@ las <- readLAS("data/MixedEucaNat_normalized.laz", filter = "-set_withheld_flag 
 plot(las, color = "Withheld_flag")
 ```
 
-#### E4. 
+#### E4.
 
 Load only the ground points and plot the point-cloud coloured by the returnnumber of the point. Do it loading the strict minimal amount of memory (4.7 Mb). Hint: use `?lidR::readLAS` and see what `select` options might help.
 
@@ -77,7 +81,7 @@ plot(las@header, map = FALSE)
 plot(plots, add = TRUE)
 ```
 
-#### E1. 
+#### E1.
 
 Clip the 5 plots with a radius of 11.3 m,
 
@@ -87,7 +91,7 @@ inventory <- clip_roi(las, plots, radius = 11.3)
 plot(inventory[[2]])
 ```
 
-#### E2. 
+#### E2.
 
 Clip a transect from A c(203850, 7358950) to B c(203950, 7959000).
 
@@ -97,7 +101,8 @@ tr <- clip_transect(las, c(203850, 7358950), c(203950, 7359000), width = 5)
 plot(tr, axis = T)
 ```
 
-#### E3. 
+#### E3.
+
 Clip a transect from A c(203850, 7358950) to B c(203950, 7959000) but reorient it so it is no longer on the XY diagonal. Hint = ?clip_transect
 
 ```{r, eval = FALSE}
@@ -113,6 +118,7 @@ plot(ptr$X, ptr$Z, cex = 0.25, pch = 19, asp = 1)
 ```{r}
 las <- readLAS("data/MixedEucaNat_normalized.laz", select = "*",  filter = "-set_withheld_flag 0")
 ```
+
 #### E1.
 
 Assuming that biomass is estimated using the equation `B = 0.5 * mean Z + 0.9 * 90th percentile of Z` applied on first returns only, map the biomass.
@@ -191,7 +197,7 @@ dtm <- grid_terrain(circ, 0.5, kriging())
 plot_dtm3d(dtm)
 ```
 
-#### E4. 
+#### E4.
 
 Compute a DSM (digital surface model). Hint: Look back to how you made a CHM.
 
@@ -201,7 +207,7 @@ dsm <- grid_canopy(circ, 1, p2r(0.1))
 plot(dsm, col = height.colors(50))
 ```
 
-#### E5. 
+#### E5.
 
 Normalize the plot.
 
@@ -220,6 +226,7 @@ Compute a CHM.
 chm <- grid_canopy(ncirc, 1, p2r(0.1))
 plot(chm, col = height.colors(50))
 ```
+
 #### E7.
 
 Estimate some metrics of interest in this plot with cloud_metric()
@@ -316,8 +323,7 @@ plot(Vtot, col = viridis::viridis(20))
 
 This exercise is complex because it involves options not yet described. Be sure to use the lidRbook and package documentation.
 
-https://cran.r-project.org/web/packages/lidR/lidR.pdf
-https://r-lidar.github.io/lidRbook/index.html
+https://cran.r-project.org/web/packages/lidR/lidR.pdf https://r-lidar.github.io/lidRbook/index.html
 
 Using:
 
@@ -449,12 +455,9 @@ m <- catalog_apply(subctg, routine_trees_test, .options = options)
 plot(m, col = rgb(0,0,1,0.3))
 ```
 
-#### E2. 
+#### E2.
 
-The following is a simple (and a bit naive) function to remove high noise points.
-- Explain what this function does
-- Create a user-defined function to apply using `catalog_apply()`
-- Hint: Dont forget about buffered points... remember `lidR::filter_*` functions.
+The following is a simple (and a bit naive) function to remove high noise points. - Explain what this function does - Create a user-defined function to apply using `catalog_apply()` - Hint: Dont forget about buffered points... remember `lidR::filter_*` functions.
 
 ```{r}
 #| code-fold: true
@@ -490,7 +493,7 @@ las <- readLAS(output)
 plot(las)
 ```
 
-#### E3. 
+#### E3.
 
 Design an application that retrieves the convex hull of each flightline (hard). Use the `concaveman::concaveman()` function, adn functions from `sf`. Start by designing a test function that works on a LAS object and later apply on the collection. The output should look like:
 
