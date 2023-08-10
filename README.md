@@ -14,7 +14,7 @@ This repository contains the material for a \~3 hour `lidR` tutorial workshop. Y
 
 ### R Packages
 
-You need to install the `lidR` package in its latest version (v \>= 3.1.3).
+You need to install the `lidR` package in its latest version (v \>= 4.0.0).
 
 ``` r
 install.packages("lidR")

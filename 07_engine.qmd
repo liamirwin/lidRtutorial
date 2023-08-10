@@ -33,7 +33,7 @@ This code performs various operations on LiDAR data using LAScatalog functionali
 ## Environment
 
 ```{r clear_warnings, warnings = FALSE, message=FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

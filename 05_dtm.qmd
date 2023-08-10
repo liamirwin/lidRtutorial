@@ -33,7 +33,7 @@ This tutorial explores the creation of a Digital Terrain Model (DTM) from LiDAR 
 ## Environment
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

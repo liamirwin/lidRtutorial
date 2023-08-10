@@ -33,7 +33,7 @@ This code demonstrates the selection of regions of interest from LiDAR data. Sim
 ## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

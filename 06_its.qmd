@@ -33,7 +33,7 @@ This code demonstrates individual tree segmentation (ITS) using LiDAR data. It c
 ## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

@@ -1,4 +1,4 @@
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

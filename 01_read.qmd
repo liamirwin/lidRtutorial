@@ -41,7 +41,7 @@ Let's get started with processing LiDAR data efficiently using `lidR` and R! Hap
 We start by loading the necessary packages, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer. We will do this for each section in the tutorial.
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages

@@ -34,7 +34,7 @@ This code demonstrates an area-based approach for LiDAR data. Basic usage involv
 ## Environment
 
 ```{r clear warnings, warnings = FALSE, message=FALSE}
-# Clear environment and specific warnings
+# Clear environment
 rm(list = ls(globalenv()))
 
 # Load packages
