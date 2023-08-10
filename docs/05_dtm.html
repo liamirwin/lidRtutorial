@@ -186,10 +186,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data Preprocessing</a></li>
   <li><a href="#visualizing-lidar-data" id="toc-visualizing-lidar-data" class="nav-link" data-scroll-target="#visualizing-lidar-data">Visualizing LiDAR Data</a></li>
-  <li><a href="#triangulation-algorithm" id="toc-triangulation-algorithm" class="nav-link" data-scroll-target="#triangulation-algorithm">Triangulation Algorithm</a></li>
+  <li><a href="#triangulation-algorithm---tin" id="toc-triangulation-algorithm---tin" class="nav-link" data-scroll-target="#triangulation-algorithm---tin">Triangulation Algorithm - <code>tin()</code></a></li>
   <li><a href="#visualizing-dtm-in-3d" id="toc-visualizing-dtm-in-3d" class="nav-link" data-scroll-target="#visualizing-dtm-in-3d">Visualizing DTM in 3D</a></li>
   <li><a href="#visualizing-dtm-with-lidar-data" id="toc-visualizing-dtm-with-lidar-data" class="nav-link" data-scroll-target="#visualizing-dtm-with-lidar-data">Visualizing DTM with LiDAR Data</a></li>
-  <li><a href="#inverse-distance-weighting-algorithm" id="toc-inverse-distance-weighting-algorithm" class="nav-link" data-scroll-target="#inverse-distance-weighting-algorithm">Inverse-Distance Weighting Algorithm</a></li>
+  <li><a href="#inverse-distance-weighting-idw-algorithm---knnidw" id="toc-inverse-distance-weighting-idw-algorithm---knnidw" class="nav-link" data-scroll-target="#inverse-distance-weighting-idw-algorithm---knnidw">Inverse-Distance Weighting (IDW) Algorithm - <code>knnidw()</code></a></li>
   <li><a href="#visualizing-idw-based-dtm-in-3d" id="toc-visualizing-idw-based-dtm-in-3d" class="nav-link" data-scroll-target="#visualizing-idw-based-dtm-in-3d">Visualizing IDW-based DTM in 3D</a></li>
   </ul></li>
   <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">Normalization</a>
@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#visualizing-normalized-lidar-data-with-tin" id="toc-visualizing-normalized-lidar-data-with-tin" class="nav-link" data-scroll-target="#visualizing-normalized-lidar-data-with-tin">Visualizing Normalized LiDAR Data with TIN</a></li>
   <li><a href="#filtering-ground-points-tin-based" id="toc-filtering-ground-points-tin-based" class="nav-link" data-scroll-target="#filtering-ground-points-tin-based">Filtering Ground Points (TIN-based)</a></li>
   <li><a href="#visualizing-filtered-ground-points-tin-based" id="toc-visualizing-filtered-ground-points-tin-based" class="nav-link" data-scroll-target="#visualizing-filtered-ground-points-tin-based">Visualizing Filtered Ground Points (TIN-based)</a></li>
-  <li><a href="#histogram-of-normalized-ground-points-1" id="toc-histogram-of-normalized-ground-points-1" class="nav-link" data-scroll-target="#histogram-of-normalized-ground-points-1">Histogram of Normalized Ground Points (</a></li>
+  <li><a href="#histogram-of-normalized-ground-points-tin-based" id="toc-histogram-of-normalized-ground-points-tin-based" class="nav-link" data-scroll-target="#histogram-of-normalized-ground-points-tin-based">Histogram of Normalized Ground Points (TIN-based)</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
@@ -255,10 +255,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center" data-warnings="false">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"rgdal_show_exportToProj4_warnings"</span> <span class="ot">=</span> <span class="st">"none"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lidR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lidR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dtm-digital-terrain-model" class="level2">
@@ -270,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load LiDAR data and filter out non-ground points</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(<span class="at">files =</span> <span class="st">"data/MixedEucaNat.laz"</span>, <span class="at">filter =</span> <span class="st">"-set_withheld_flag 0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here, we load the LiDAR data and exclude non-ground points flagged with the withheld flag.</p>
+<p>Here, we load the LiDAR data and exclude points flagged as withheld.</p>
 </section>
 <section id="visualizing-lidar-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-lidar-data">Visualizing LiDAR Data</h3>
@@ -295,20 +294,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Visualizing the LiDAR data again, this time with a white background, helps distinguish ground points more effectively.</p>
+<p>Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.</p>
 </section>
-<section id="triangulation-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="triangulation-algorithm">Triangulation Algorithm</h3>
+<section id="triangulation-algorithm---tin" class="level3">
+<h3 class="anchored" data-anchor-id="triangulation-algorithm---tin">Triangulation Algorithm - <code>tin()</code></h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a DTM using the TIN (Triangulated Irregular Network) algorithm</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dtm_tin <span class="ot">&lt;-</span> <span class="fu">grid_terrain</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="dv">1</span>, <span class="at">algorithm =</span> <span class="fu">tin</span>())</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: There were 37 degenerated ground points. Some X Y coordinates were</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; repeated but with different Z coordinates. min Z were retained.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We create a DTM using the TIN algorithm with a specified resolution.</p>
+<p>We create a DTM using the TIN algorithm with a specified resolution (1 meter).</p>
 </section>
 <section id="visualizing-dtm-in-3d" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-dtm-in-3d">Visualizing DTM in 3D</h3>
+<p>To better ceonceptualize the terrain, we visualize the generated DTM in a 3D plot.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the DTM in 3D</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_dtm3d</span>(dtm_tin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -320,13 +320,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>To better understand the terrain, we visualize the generated DTM in a 3D plot.</p>
 </section>
 <section id="visualizing-dtm-with-lidar-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-dtm-with-lidar-data">Visualizing DTM with LiDAR Data</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the LiDAR data with the overlaid DTM in 3D</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">plot</span>(las, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">add_dtm3d</span>(x, dtm_tin, <span class="at">bg =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We overlay the DTM on the LiDAR data (non-ground points only) for a more comprehensive view of the terrain.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for non-ground points to show dtm better</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>las_ng <span class="ot">&lt;-</span> <span class="fu">filter_poi</span>(<span class="at">las =</span> las, Classification <span class="sc">!=</span> 2L)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the LiDAR data with the overlaid DTM in 3D</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">plot</span>(las_ng, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">add_dtm3d</span>(x, dtm_tin, <span class="at">bg =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -336,20 +339,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We overlay the DTM on the LiDAR data for a more comprehensive view of the terrain.</p>
 </section>
-<section id="inverse-distance-weighting-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="inverse-distance-weighting-algorithm">Inverse-Distance Weighting Algorithm</h3>
+<section id="inverse-distance-weighting-idw-algorithm---knnidw" class="level3">
+<h3 class="anchored" data-anchor-id="inverse-distance-weighting-idw-algorithm---knnidw">Inverse-Distance Weighting (IDW) Algorithm - <code>knnidw()</code></h3>
+<p>Next, we generate a DTM using the IDW algorithm to compare results with the TIN-based DTM.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a DTM using the IDW (Inverse-Distance Weighting) algorithm</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dtm_idw <span class="ot">&lt;-</span> <span class="fu">grid_terrain</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="dv">1</span>, <span class="at">algorithm =</span> <span class="fu">knnidw</span>())</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: There were 37 degenerated ground points. Some X Y coordinates were</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; repeated but with different Z coordinates. min Z were retained.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Next, we generate a DTM using the IDW algorithm to compare results with the TIN-based DTM.</p>
 </section>
 <section id="visualizing-idw-based-dtm-in-3d" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-idw-based-dtm-in-3d">Visualizing IDW-based DTM in 3D</h3>
+<p>We visualize the DTM generated using the IDW algorithm in a 3D plot.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the IDW-based DTM in 3D</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_dtm3d</span>(dtm_idw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -361,7 +364,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We visualize the DTM generated using the IDW algorithm in a 3D plot.</p>
 </section>
 </section>
 <section id="normalization" class="level2">
@@ -369,14 +371,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this section, we’ll focus on height normalization of LiDAR data using both DTM-based and point-based normalization methods.</p>
 <section id="dtm-based-normalization" class="level3">
 <h3 class="anchored" data-anchor-id="dtm-based-normalization">DTM-based Normalization</h3>
+<p>We perform DTM-based normalization on the LiDAR data using the previously generated DTM.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize the LiDAR data using DTM-based normalization</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nlas_dtm <span class="ot">&lt;-</span> <span class="fu">normalize_height</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> dtm_tin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We perform DTM-based normalization on the LiDAR data using the previously generated DTM.</p>
 </section>
 <section id="visualizing-normalized-lidar-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-normalized-lidar-data">Visualizing Normalized LiDAR Data</h3>
+<p>We visualize the normalized LiDAR data, illustrating heights relative to the DTM.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the normalized LiDAR data</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nlas_dtm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -388,18 +391,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We visualize the normalized LiDAR data, illustrating heights relative to the DTM.</p>
 </section>
 <section id="filtering-ground-points" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-ground-points">Filtering Ground Points</h3>
+<p>We filter the normalized data to keep only the ground points.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the normalized data to retain only ground points</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gnd_dtm <span class="ot">&lt;-</span> <span class="fu">filter_ground</span>(<span class="at">las =</span> nlas_dtm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We filter the normalized data to keep only the ground points.</p>
 </section>
 <section id="visualizing-filtered-ground-points" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-filtered-ground-points">Visualizing Filtered Ground Points</h3>
+<p>We visualize the filtered ground points, focusing on the terrain after normalization.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the filtered ground points</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gnd_dtm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -411,10 +414,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We visualize the filtered ground points, focusing on the terrain after normalization.</p>
 </section>
 <section id="histogram-of-normalized-ground-points" class="level3">
 <h3 class="anchored" data-anchor-id="histogram-of-normalized-ground-points">Histogram of Normalized Ground Points</h3>
+<p>A histogram helps us understand the distribution of normalized ground points’ height.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the histogram of normalized ground points' height</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gnd_dtm<span class="sc">$</span>Z, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -426,34 +429,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>A histogram helps us understand the distribution of normalized ground points’ height.</p>
 </section>
 <section id="dtm-based-normalization-with-tin-algorithm" class="level3">
 <h3 class="anchored" data-anchor-id="dtm-based-normalization-with-tin-algorithm">DTM-based Normalization with TIN Algorithm</h3>
+<p>We perform DTM-based normalization on the LiDAR data using the TIN algorithm.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize the LiDAR data using DTM-based normalization with TIN algorithm</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>nlas_tin <span class="ot">&lt;-</span> <span class="fu">normalize_height</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> <span class="fu">tin</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We perform DTM-based normalization on the LiDAR data using the TIN algorithm.</p>
 </section>
 <section id="visualizing-normalized-lidar-data-with-tin" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-normalized-lidar-data-with-tin">Visualizing Normalized LiDAR Data with TIN</h3>
+<p>We visualize the normalized LiDAR data using the TIN algorithm, showing heights relative to the DTM.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the normalized LiDAR data using the TIN algorithm</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nlas_tin, <span class="at">bg =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We visualize the normalized LiDAR data using the TIN algorithm, showing heights relative to the DTM.</p>
 </section>
 <section id="filtering-ground-points-tin-based" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-ground-points-tin-based">Filtering Ground Points (TIN-based)</h3>
+<p>We filter the normalized data (TIN-based) to keep only the ground points.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the normalized data (TIN-based) to retain only ground points</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gnd_tin <span class="ot">&lt;-</span> <span class="fu">filter_ground</span>(<span class="at">las =</span> nlas_tin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We filter the normalized data (TIN-based) to keep only the ground points.</p>
 </section>
 <section id="visualizing-filtered-ground-points-tin-based" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-filtered-ground-points-tin-based">Visualizing Filtered Ground Points (TIN-based)</h3>
+<p>We visualize the filtered ground points after TIN-based normalization, focusing on the terrain.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the filtered ground points after TIN-based normalization</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gnd_tin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -465,11 +468,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We visualize the filtered ground points after TIN-based normalization, focusing on the terrain.</p>
 </section>
-<section id="histogram-of-normalized-ground-points-1" class="level3">
-<h3 class="anchored" data-anchor-id="histogram-of-normalized-ground-points-1">Histogram of Normalized Ground Points (</h3>
-<p>TIN-based)</p>
+<section id="histogram-of-normalized-ground-points-tin-based" class="level3">
+<h3 class="anchored" data-anchor-id="histogram-of-normalized-ground-points-tin-based">Histogram of Normalized Ground Points (TIN-based)</h3>
+<p>A histogram illustrates the distribution of normalized ground points’ height after TIN-based normalization.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the histogram of normalized ground points' height after TIN-based normalization</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gnd_tin<span class="sc">$</span>Z, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">0.05</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,7 +483,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>A histogram illustrates the distribution of normalized ground points’ height after TIN-based normalization.</p>
 </section>
 </section>
 <section id="exercises" class="level2">

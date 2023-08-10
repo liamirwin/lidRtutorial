@@ -1,5 +1,5 @@
 ---
-title: "Area-based approach"
+title: "Area-based metrics"
 ---
 
 ```{r, echo = FALSE}
@@ -24,7 +24,8 @@ rgl::setupKnitr(autoprint = TRUE)
 
 [Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/03_aba.R)
 
-[lidRbook Section](https://r-lidar.github.io/lidRbook/modeling-aba.html)
+-   [lidRbook metrics section](https://r-lidar.github.io/lidRbook/modeling-aba.html)
+-   [lidRbook modelling section](https://r-lidar.github.io/lidRbook/modeling-aba.html)
 
 ## Overview
 
@@ -35,9 +36,8 @@ This code demonstrates an area-based approach for LiDAR data. Basic usage involv
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 ```
@@ -48,7 +48,7 @@ We'll cover the basic usage of the `lidR` package to compute metrics from LiDAR 
 
 ```{r load_lidar_data}
 # Load LiDAR data, excluding withheld flag points
-las <- readLAS("data/MixedEucaNat_normalized.laz", select = "*",  filter = "-set_withheld_flag 0")
+las <- readLAS(files = "data/MixedEucaNat_normalized.laz", select = "*",  filter = "-set_withheld_flag 0")
 ```
 
 ```{r mean_height_pixel_metrics}
@@ -91,7 +91,7 @@ The `lidR` package provides flexibility for users to define custom metrics. Chec
 f <- function(x, weight) { sum(x*weight)/sum(weight) }
 
 # Compute grid metrics for the user-defined function
-X <- pixel_metrics(las = las, ~f(Z, Intensity), 10)
+X <- pixel_metrics(las = las, func = ~f(Z, Intensity), res = 10)
 
 # Visualize the output
 plot(X, col = height.colors(50))

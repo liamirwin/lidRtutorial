@@ -1,14 +1,17 @@
-# Load libraries
+# Clear environment and specific warnings
+rm(list = ls(globalenv()))
+
+# Load packages
 library(lidR)
 library(terra)
 library(future)
 
 # Read a LAS catalog
-ctg <- readLAScatalog("data/Farm_A/")
+ctg <- readLAScatalog(folder = "data/Farm_A/")
 
 # Inspect the first LAS file in the catalog
 las_file <- ctg$filename[1]
-las <- readLAS(las_file)
+las <- readLAS(files = las_file)
 las
 
 # Visualize the LiDAR data in 3D
@@ -16,8 +19,8 @@ plot(las, bg = "white")
 
 # Read a LAS file from the catalog and filter surface points
 las_file <- ctg$filename[16]
-las <- readLAS(las_file, filter = "-drop_withheld -drop_z_below 0 -drop_z_above 40")
-surflas <- filter_surfacepoints(las, 1)
+las <- readLAS(files = las_file, filter = "-drop_withheld -drop_z_below 0 -drop_z_above 40")
+surflas <- filter_surfacepoints(las = las, res = 1)
 
 # Visualize the LiDAR data with a default color palette
 plot(las, bg = "white")
@@ -25,7 +28,7 @@ plot(las, bg = "white")
 # Visualize the surface points using a default color palette
 plot(surflas, bg = "white")
 
-ri <- pixel_metrics(las, ~rumple_index(X,Y,Z), 10)
+ri <- pixel_metrics(las = las, func = ~rumple_index(X,Y,Z), res = 10)
 plot(ri)
 
 # User-defined function for processing chunks
@@ -35,7 +38,7 @@ routine <- function(chunk){
   
   # Perform computation
   m <- pixel_metrics(las = las, func = ~max(Z), res = 20)
-  output <- terra::crop(m, terra::ext(chunk))
+  output <- terra::crop(x = m, terra::ext(chunk))
   
   return(output)
 }
@@ -47,26 +50,26 @@ plan(multisession)
 opt_filter(ctg) <- "-drop_withheld"
 
 # Apply routine to catalog
-out <- catalog_apply(ctg, routine)
+out <- catalog_apply(ctg = ctg, FUN = routine)
 
 # Inspect the output list
 out[1:5]
 
 # Use the engine-supported method for merging
 options <- list(automerge = TRUE)
-out <- catalog_apply(ctg, routine, .options = options)
+out <- catalog_apply(ctg = ctg, FUN = routine, .options = options)
 print(out)
 
 # User-defined function for rumple index calculation
 routine_rumple <- function(chunk, res1 = 10, res2 = 1){
   las <-  readLAS(chunk)
   if (is.empty(las)) return(NULL)
-  bbox <- terra::ext(chunk)
+  bbox <- terra::ext(x = chunk)
   
   las <- filter_surfacepoints(las, res2)
-  ri  <- pixel_metrics(las, ~rumple_index(X,Y,Z), res1)
+  ri  <- pixel_metrics(las = las, func = ~rumple_index(X,Y,Z), res = res1)
   
-  output <- terra::crop(ri, bbox)
+  output <- terra::crop(x = ri, y = bbox)
   return(output)
 }
 
@@ -80,7 +83,7 @@ opt_chunk_size(ctg) <- 0
 options <- list(automerge = TRUE, alignment = 10)
 
 # Apply the user-defined function to the catalog
-ri <- catalog_apply(ctg, routine_rumple, res1 = 10, res2 = 0.5, .options = options)
+ri <- catalog_apply(ctg = ctg, FUN = routine_rumple, res1 = 10, res2 = 0.5, .options = options)
 
 # Plot the output
 plot(ri, col = height.colors(50))
@@ -92,10 +95,10 @@ routine_trees <- function(chunk) {
   if (is.empty(las)) return(NULL)
   
   # Get the chunk bounding box
-  bbox <- st_bbox(chunk)
+  bbox <- sf::st_bbox(obj = chunk)
 
   # Filter surface points and create canopy height model (CHM)
-  las <- filter_surfacepoints(las, res = 0.5)
+  las <- filter_surfacepoints(las = las, res = 0.5)
   chm <- rasterize_canopy(las = las, res = 0.5, algorithm = p2r())
 
   # Detect and segment trees
@@ -118,7 +121,7 @@ opt_chunk_buffer(ctg) <- 15
 options <- list(automerge = TRUE) # Merge all outputs
 
 # Apply the function to the catalog
-m <- catalog_apply(ctg, routine_trees, .options = options)
+m <- catalog_apply(ctg = ctg, FUN = routine_trees, .options = options)
 
 # View and visualize the output
 m

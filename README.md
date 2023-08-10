@@ -20,7 +20,7 @@ You need to install the `lidR` package in its latest version (v \>= 3.1.3).
 install.packages("lidR")
 ```
 
-To run all code in the tutorial yourself, you will need to install the following libraries. You can use `lidR` without them, however.
+To run all code in the tutorial yourself, you will need to install the following packages. You can use `lidR` without them, however.
 
 ``` r
 libs <- c("geometry","viridis","future","sf","maptools","terra","mapview","mapedit","concaveman")
@@ -60,6 +60,6 @@ When working on exercises:
 
 -   2015 and 2018 thanks to the financial support of the AWARE project NSERC CRDPJ 462973-14; grantee Prof. Nicholas C. Coops.
 
--   2018 and 2021 thanks to the financial support of the Ministère des Forêts, de la Faune et des Parcs of Québec.
+-   2018 and 2021 thanks to the financial support of the Ministère des Forêts, de la Faune et des Parcs (Québec).
 
 The current release version of `lidR` can be found on [CRAN](https://cran.r-project.org/web/packages/lidR/) and source code is hosted on [GitHub](https://github.com/r-lidar/lidR).

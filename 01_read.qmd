@@ -24,7 +24,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 [Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/01_read.R)
 
-[lidRbook Section](https://r-lidar.github.io/lidRbook/index.htm)
+[lidRbook section](https://r-lidar.github.io/lidRbook/index.htm)
 
 ## Overview
 
@@ -38,14 +38,13 @@ Let's get started with processing LiDAR data efficiently using `lidR` and R! Hap
 
 ## Environment
 
-We start by loading the necessary libraries, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer. We will do this for each section in the tutorial.
+We start by loading the necessary packages, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer. We will do this for each section in the tutorial.
 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings" = "none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 ```

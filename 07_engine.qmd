@@ -35,9 +35,8 @@ This code performs various operations on LiDAR data using LAScatalog functionali
 ```{r clear_warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 ```
@@ -273,7 +272,7 @@ opt_independent_files(ctg_plots) <- TRUE
 opt_output_files(ctg_plots) <- paste0(tempdir(),"/{XCENTER}_{XCENTER}")
 
 # Generate plot-level terrain models
-rasterize_terrain(ctg_plots, 1, tin())
+rasterize_terrain(las = ctg_plots, res = 1, algorithm = tin())
 ```
 
 ```{r check_plot}

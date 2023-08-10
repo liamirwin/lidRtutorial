@@ -1,8 +1,7 @@
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 

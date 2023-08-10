@@ -248,12 +248,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center" data-warnings="false">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"rgdal_show_exportToProj4_warnings"</span><span class="ot">=</span><span class="st">"none"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lidR)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lidR)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(future)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-usage" class="level2">
@@ -268,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We start by reading a LAS catalog and inspecting one of its LAS files.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a LAS catalog</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ctg <span class="ot">&lt;-</span> <span class="fu">readLAScatalog</span>(<span class="st">"data/Farm_A/"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ctg <span class="ot">&lt;-</span> <span class="fu">readLAScatalog</span>(<span class="at">folder =</span> <span class="st">"data/Farm_A/"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the first LAS file in the catalog</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>las_file <span class="ot">&lt;-</span> ctg<span class="sc">$</span>filename[<span class="dv">1</span>]</span>
@@ -303,8 +302,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a LAS file from the catalog and filter surface points</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>las_file <span class="ot">&lt;-</span> ctg<span class="sc">$</span>filename[<span class="dv">16</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(las_file, <span class="at">filter =</span> <span class="st">"-drop_withheld -drop_z_below 0 -drop_z_above 40"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>surflas <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(las, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(<span class="at">files =</span> las_file, <span class="at">filter =</span> <span class="st">"-drop_withheld -drop_z_below 0 -drop_z_above 40"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>surflas <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-lidar-data-1" class="level3">
@@ -333,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="calculating-rumple-index">Calculating Rumple Index</h3>
 <p>We calculate the rumple index using the <code>pixel_metrics()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), <span class="dv">10</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), <span class="at">res =</span> <span class="dv">10</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -359,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform computation</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="at">func =</span> <span class="sc">~</span><span class="fu">max</span>(Z), <span class="at">res =</span> <span class="dv">20</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(m, terra<span class="sc">::</span><span class="fu">ext</span>(chunk))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> m, terra<span class="sc">::</span><span class="fu">ext</span>(chunk))</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -371,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_filter</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"-drop_withheld"</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply routine to catalog</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(ctg, routine)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine)</span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ✓</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 2 of 25 (8%): state ✓</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 3 of 25 (12%): state ✓</span></span>
@@ -457,7 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the engine-supported method for merging</span></span>
 <span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(ctg, routine, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -488,8 +487,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; Chunk 21 of 25 (84%): state ✓
 #&gt; Chunk 22 of 25 (88%): state ✓
 #&gt; Chunk 23 of 25 (92%): state ✓
-#&gt; Chunk 24 of 25 (96%): state ✓
-#&gt; Chunk 25 of 25 (100%): state ✓
+#&gt; Chunk 25 of 25 (96%): state ✓
+#&gt; Chunk 24 of 25 (100%): state ✓
 print(out)
 #&gt; class       : SpatRaster 
 #&gt; dimensions  : 35, 35, 1  (nrow, ncol, nlyr)
@@ -512,10 +511,10 @@ print(out)
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ext</span>(chunk)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(las, res2)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ri  <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), res1)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(<span class="at">las =</span> las, <span class="at">res =</span> res2)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ri  <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), res1)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(ri, bbox)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> ri, <span class="at">y =</span> bbox)</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
@@ -529,7 +528,7 @@ print(out)
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>, <span class="at">alignment =</span> <span class="dv">10</span>)</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the user-defined function to the catalog</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(ctg, routine_rumple, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="fl">0.5</span>, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_rumple, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="fl">0.5</span>, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -590,7 +589,7 @@ plot(ri, col = height.colors(50))</code></pre>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the chunk bounding box</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(chunk)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(<span class="at">obj =</span> chunk)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter surface points and create canopy height model (CHM)</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(las, <span class="at">res =</span> <span class="fl">0.5</span>)</span>
@@ -616,7 +615,7 @@ plot(ri, col = height.colors(50))</code></pre>
 <span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>) <span class="co"># Merge all outputs</span></span>
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to the catalog</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(ctg, routine_trees, <span class="at">.options =</span> options)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_trees, <span class="at">.options =</span> options)</span>
 <span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
 <span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ⚠</span></span>
@@ -670,10 +669,10 @@ plot(ri, col = height.colors(50))</code></pre>
 <span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 17 of 25 (68%): state ⚠</span></span>
 <span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (72%): state ⚠</span></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (72%): state ⚠</span></span>
 <span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (76%): state ⚠</span></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (76%): state ⚠</span></span>
 <span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
 <span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 19 of 25 (80%): state ⚠</span></span>
@@ -685,10 +684,10 @@ plot(ri, col = height.colors(50))</code></pre>
 <span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 22 of 25 (88%): state ⚠</span></span>
 <span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (92%): state ⚠</span></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 24 of 25 (92%): state ⚠</span></span>
 <span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 24 of 25 (96%): state ⚠</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (96%): state ⚠</span></span>
 <span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
 <span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

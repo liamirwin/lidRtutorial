@@ -27,6 +27,7 @@ rgl::setupKnitr(autoprint = TRUE)
 ## 1-LAS
 
 ```{r, warning=FALSE, message=FALSE}
+# Load packages
 library(lidR)
 library(sf)
 library(terra)
@@ -36,9 +37,12 @@ library(terra)
 
 What are withheld points? Where are they in our pointcloud?
 
-According to ASPRS LAS specification http://www.asprs.org/wp-content/uploads/2019/07/LAS_1_4_r15.pdf page 18 "a point that should not be included in processing (synonymous with Deleted)"
+```{r}
+#| code-fold: true
+# According to ASPRS LAS specification http://www.asprs.org/wp-content/uploads/2019/07/LAS_1_4_r15.pdf page 18 "a point # that should not be included in processing (synonymous with Deleted)"
 
-They are on the edges. It looks like they correspond to a buffer. LAStools makes use of the withheld bit to flag some points. Without more information on former processing step it is hard to say.
+# They are on the edges. It looks like they correspond to a buffer. LAStools makes use of the withheld bit to flag some # points. Without more information on former processing step it is hard to say.
+```
 
 #### E2.
 

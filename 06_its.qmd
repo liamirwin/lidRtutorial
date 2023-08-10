@@ -35,11 +35,11 @@ This code demonstrates individual tree segmentation (ITS) using LiDAR data. It c
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
+library(terra)
 
 # Read in LiDAR file and set some color palettes
 las <- readLAS("data/MixedEucaNat_normalized.laz",  filter = "-set_withheld_flag 0")
@@ -52,6 +52,7 @@ col2 <- pastel.colors(900)
 We start by creating a Canopy Height Model (CHM) from the LiDAR data. The `grid_canopy` function generates the CHM using a specified resolution (`res`) and a chosen algorithm, here `p2r(0.15)`, to compute the percentiles.
 
 ```{r chm_creation}
+# Generate CHM
 chm <- grid_canopy(las = las, res = 0.5, algorithm = p2r(0.15))
 plot(chm, col = col1)
 ```
@@ -63,8 +64,9 @@ After building the CHM, we visualize it using a color palette (`col1`).
 Optionally, we can smooth the CHM using a kernel to remove small-scale variations and enhance larger features like tree canopies.
 
 ```{r chm_smoothing}
+# Generate kernel and smooth chm
 kernel <- matrix(1, 3, 3)
-schm <- raster::focal(chm, w = kernel, fun = median, na.rm = TRUE)
+schm <- terra::focal(x = chm, w = kernel, fun = median, na.rm = TRUE)
 plot(schm, col = height.colors(30))
 ```
 
@@ -75,6 +77,7 @@ Here, we smooth the CHM using a median filter with a 3x3 kernel. The smoothed CH
 Next, we detect tree tops using the smoothed CHM. The `locate_trees` function identifies tree tops based on local maxima.
 
 ```{r tree_detection, warning = FALSE}
+# Detect trees
 ttops <- locate_trees(las = schm, algorithm = lmf(ws = 2.5))
 ttops
 plot(chm, col = col1)
@@ -88,10 +91,12 @@ The detected tree tops (`ttops`) are plotted on top of the CHM (`chm`) to visual
 Now, we perform tree segmentation using the detected tree tops. The `segment_trees` function segments the trees in the LiDAR point cloud based on the previously detected tree tops.
 
 ``` r
+# Segment trees using dalponte
 las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = ttops))
 ```
 
 ```{r tree_segmentation, echo = FALSE, message = FALSE, warning=FALSE}
+# Segment trees using dalponte
 las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = ttops))
 ```
 
@@ -118,16 +123,17 @@ tree125 <- filter_poi(las = las, treeID == 125)
 
 ``` r
 plot(tree25, size = 4)
-plot(tree125, size = 3)
 ```
 
 ```{r visualize_tree_25, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
-# Visualize using intensity values as colors
 plot(tree25, size = 4, bg = "white")
 ```
 
+```         
+plot(tree125, size = 3)
+```
+
 ```{r visualize_tree_125, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
-# Visualize using intensity values as colors
 plot(tree125, size = 4, bg = "white")
 ```
 
@@ -138,6 +144,7 @@ After segmentation, we count the number of trees detected and visualize all the 
 The `lidR` package is designed for point clouds, but some functions can be applied to raster data as well. Here, we show how to extract trees from the CHM without using the point cloud directly.
 
 ```{r raster_trees}
+# Generate rasterized delineation
 trees <- dalponte2016(chm = chm, treetops = ttops)() # Notice the parenthesis at the end
 trees
 
@@ -156,15 +163,18 @@ In this section, we will explore tree detection and segmentation methods that do
 We begin with tree detection using the local maxima filtering (lmf) algorithm. This approach directly works with the LiDAR point cloud to detect tree tops.
 
 ```{r tree_detection_no_chm}
+# Detect trees
 ttops <- locate_trees(las = las, algorithm = lmf(ws = 3, hmin = 5))
 ```
 
 ``` r
+# Visualize
 x <- plot(las)
 add_treetops3d(x = x, ttops = ttops, radius = 0.5)
 ```
 
 ```{r visualize_tree_tops , echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Visualize
 x <- plot(las, bg = "white")
 add_treetops3d(x = x, ttops = ttops, radius = 0.5)
 ```
@@ -176,10 +186,12 @@ We detect tree tops using the `lmf` algorithm and visualize them in 3D by adding
 Next, we perform tree segmentation using the `li2012` algorithm, which directly processes the LiDAR point cloud.
 
 ``` r
+# Segment using li
 las <- segment_trees(las = las, algorithm = li2012())
 ```
 
 ```{r tree_segmentation_li, echo = FALSE, message = FALSE, warning=FALSE}
+# Segment using li
 las <- segment_trees(las = las, algorithm = li2012())
 ```
 
@@ -203,6 +215,7 @@ In this section, we will extract various metrics from the tree segmentation resu
 The `crown_metrics()` function extracts metrics from the segmented trees using a user-defined function. We use the length of the Z coordinate to obtain the tree height as an example.
 
 ```{r crown_metrics_example}
+# Generate metrics for each delineated crown
 metrics <- crown_metrics(las = las, func = ~list(n = length(Z)))
 metrics
 plot(metrics["n"], cex = 0.8)
@@ -215,13 +228,23 @@ We calculate the number of points (`n`) in each tree crown using a user-defined 
 We can map any user-defined function at the tree level using the `crown_metrics()` function, just like `grid_metrics()`.
 
 ```{r user_defined_metrics}
-f <- function(x, y)
-{
-  ch <- chull(x, y)
+# User defined function for area calculation
+f <- function(x, y) {
+  # Get xy for tree
+  coords <- cbind(x, y)
+  
+  # Convex hull
+  ch <- chull(coords)
+  
+  # Close coordinates
   ch <- c(ch, ch[1])
-  coords <- data.frame(x = x[ch], y = y[ch])
-  p  <- sp::Polygon(coords)
-  area <- p@area
+  ch_coords <- coords[ch, ]
+  
+  # Generate polygon
+  p <- st_polygon(list(ch_coords))
+  
+  #calculate area
+  area <- st_area(p)
 
   return(list(A = area))
 }
@@ -285,7 +308,7 @@ Find the trees and count the trees.
 
 #### E3.
 
-Compute and map the density of trees with a 10 m resolution \[1\].
+Compute and map the density of trees with a 10 m resolution.
 
 #### E4.
 

@@ -35,9 +35,8 @@ This tutorial explores the creation of a Digital Terrain Model (DTM) from LiDAR 
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings" = "none")
 
-# Load libraries
+# Load packages
 library(lidR)
 ```
 
@@ -52,7 +51,7 @@ In this section, we'll generate a Digital Terrain Model (DTM) from LiDAR data us
 las <- readLAS(files = "data/MixedEucaNat.laz", filter = "-set_withheld_flag 0")
 ```
 
-Here, we load the LiDAR data and exclude non-ground points flagged with the withheld flag.
+Here, we load the LiDAR data and exclude points flagged as withheld.
 
 ### Visualizing LiDAR Data
 
@@ -76,18 +75,20 @@ plot(las, color = "Classification")
 plot(las, color = "Classification", bg = "white")
 ```
 
-Visualizing the LiDAR data again, this time with a white background, helps distinguish ground points more effectively.
+Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.
 
-### Triangulation Algorithm
+### Triangulation Algorithm - `tin()`
 
 ```{r dtm_triangulation}
 # Generate a DTM using the TIN (Triangulated Irregular Network) algorithm
 dtm_tin <- grid_terrain(las = las, res = 1, algorithm = tin())
 ```
 
-We create a DTM using the TIN algorithm with a specified resolution.
+We create a DTM using the TIN algorithm with a specified resolution (1 meter).
 
 ### Visualizing DTM in 3D
+
+To better ceonceptualize the terrain, we visualize the generated DTM in a 3D plot.
 
 ``` r
 # Visualize the DTM in 3D
@@ -99,34 +100,40 @@ plot_dtm3d(dtm_tin)
 plot_dtm3d(dtm_tin, bg = "white")
 ```
 
-To better understand the terrain, we visualize the generated DTM in a 3D plot.
-
 ### Visualizing DTM with LiDAR Data
 
+We overlay the DTM on the LiDAR data (non-ground points only) for a more comprehensive view of the terrain.
+
 ``` r
+# Filter for non-ground points to show dtm better
+las_ng <- filter_poi(las = las, Classification != 2L)
+
 # Visualize the LiDAR data with the overlaid DTM in 3D
-x <- plot(las, bg = "white")
+x <- plot(las_ng, bg = "white")
 add_dtm3d(x, dtm_tin, bg = "white")
 ```
 
 ```{r dtm_visualize_with_lidar, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Filter for non-ground points to show dtm better
+las_ng <- filter_poi(las = las, Classification != 2L)
+
 # Visualize the LiDAR data with the overlaid DTM in 3D
-x <- plot(las, bg = "white")
+x <- plot(las_ng, bg = "white")
 add_dtm3d(x, dtm_tin, bg = "white")
 ```
 
-We overlay the DTM on the LiDAR data for a more comprehensive view of the terrain.
+### Inverse-Distance Weighting (IDW) Algorithm - `knnidw()`
 
-### Inverse-Distance Weighting Algorithm
+Next, we generate a DTM using the IDW algorithm to compare results with the TIN-based DTM.
 
 ```{r dtm_idw}
 # Generate a DTM using the IDW (Inverse-Distance Weighting) algorithm
 dtm_idw <- grid_terrain(las = las, res = 1, algorithm = knnidw())
 ```
 
-Next, we generate a DTM using the IDW algorithm to compare results with the TIN-based DTM.
-
 ### Visualizing IDW-based DTM in 3D
+
+We visualize the DTM generated using the IDW algorithm in a 3D plot.
 
 ``` r
 # Visualize the IDW-based DTM in 3D
@@ -138,22 +145,22 @@ plot_dtm3d(dtm_idw)
 plot_dtm3d(dtm_idw, bg = "white")
 ```
 
-We visualize the DTM generated using the IDW algorithm in a 3D plot.
-
 ## Normalization
 
 In this section, we'll focus on height normalization of LiDAR data using both DTM-based and point-based normalization methods.
 
 ### DTM-based Normalization
 
+We perform DTM-based normalization on the LiDAR data using the previously generated DTM.
+
 ```{r normalization_dtm}
 # Normalize the LiDAR data using DTM-based normalization
 nlas_dtm <- normalize_height(las = las, algorithm = dtm_tin)
 ```
 
-We perform DTM-based normalization on the LiDAR data using the previously generated DTM.
-
 ### Visualizing Normalized LiDAR Data
+
+We visualize the normalized LiDAR data, illustrating heights relative to the DTM.
 
 ``` r
 # Visualize the normalized LiDAR data
@@ -165,18 +172,18 @@ plot(nlas_dtm)
 plot(nlas_dtm, bg = "white")
 ```
 
-We visualize the normalized LiDAR data, illustrating heights relative to the DTM.
-
 ### Filtering Ground Points
+
+We filter the normalized data to keep only the ground points.
 
 ```{r normalization_filter_ground}
 # Filter the normalized data to retain only ground points
 gnd_dtm <- filter_ground(las = nlas_dtm)
 ```
 
-We filter the normalized data to keep only the ground points.
-
 ### Visualizing Filtered Ground Points
+
+We visualize the filtered ground points, focusing on the terrain after normalization.
 
 ``` r
 # Visualize the filtered ground points
@@ -188,45 +195,45 @@ plot(gnd_dtm)
 plot(gnd_dtm, bg = "white")
 ```
 
-We visualize the filtered ground points, focusing on the terrain after normalization.
-
 ### Histogram of Normalized Ground Points
+
+A histogram helps us understand the distribution of normalized ground points' height.
 
 ```{r normalization_histogram}
 # Plot the histogram of normalized ground points' height
 hist(gnd_dtm$Z, breaks = seq(-1.5, 1.5, 0.05))
 ```
 
-A histogram helps us understand the distribution of normalized ground points' height.
-
 ### DTM-based Normalization with TIN Algorithm
+
+We perform DTM-based normalization on the LiDAR data using the TIN algorithm.
 
 ```{r normalization_dtm_tin}
 # Normalize the LiDAR data using DTM-based normalization with TIN algorithm
 nlas_tin <- normalize_height(las = las, algorithm = tin())
 ```
 
-We perform DTM-based normalization on the LiDAR data using the TIN algorithm.
-
 ### Visualizing Normalized LiDAR Data with TIN
+
+We visualize the normalized LiDAR data using the TIN algorithm, showing heights relative to the DTM.
 
 ```{r normalization_visualize_tin}
 # Visualize the normalized LiDAR data using the TIN algorithm
 plot(nlas_tin, bg = "white")
 ```
 
-We visualize the normalized LiDAR data using the TIN algorithm, showing heights relative to the DTM.
-
 ### Filtering Ground Points (TIN-based)
+
+We filter the normalized data (TIN-based) to keep only the ground points.
 
 ```{r normalization_filter_ground_tin}
 # Filter the normalized data (TIN-based) to retain only ground points
 gnd_tin <- filter_ground(las = nlas_tin)
 ```
 
-We filter the normalized data (TIN-based) to keep only the ground points.
-
 ### Visualizing Filtered Ground Points (TIN-based)
+
+We visualize the filtered ground points after TIN-based normalization, focusing on the terrain.
 
 ``` r
 # Visualize the filtered ground points after TIN-based normalization
@@ -238,18 +245,14 @@ plot(gnd_tin)
 plot(gnd_tin, bg = "white")
 ```
 
-We visualize the filtered ground points after TIN-based normalization, focusing on the terrain.
+### Histogram of Normalized Ground Points (TIN-based)
 
-### Histogram of Normalized Ground Points (
-
-TIN-based)
+A histogram illustrates the distribution of normalized ground points' height after TIN-based normalization.
 
 ```{r normalization_histogram_tin}
 # Plot the histogram of normalized ground points' height after TIN-based normalization
 hist(gnd_tin$Z, breaks = seq(-1.5, 1.5, 0.05))
 ```
-
-A histogram illustrates the distribution of normalized ground points' height after TIN-based normalization.
 
 ## Exercises
 

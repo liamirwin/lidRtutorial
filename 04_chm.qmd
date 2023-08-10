@@ -24,7 +24,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 [Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/04_chm.R)
 
-[lidRbook Section](https://r-lidar.github.io/lidRbook/chm.html)
+[lidRbook section](https://r-lidar.github.io/lidRbook/chm.html)
 
 ## Overview
 
@@ -35,9 +35,8 @@ This code demonstrates the creation of a Canopy Height Model (CHM) using LiDAR d
 ```{r clear_warnings, warnings = FALSE, message = FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings" = "none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(microbenchmark)
 library(terra)

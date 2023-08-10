@@ -28,7 +28,7 @@ ttops = locate_trees(las = las, algorithm = lmf(ws = 3, hmin = 5))
 x = plot(las)
 add_treetops3d(x = x, ttops = ttops)
 
-# 3. Compute and map the density of trees with a 10 m resolution [1]
+# 3. Compute and map the density of trees with a 10 m resolution
 
 r = terra::rast(x = ttops)
 terra::res(r) <- 10

@@ -1,8 +1,7 @@
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 
@@ -36,7 +35,7 @@ plot(metrics, "zsd", col = height.colors(50))
 f <- function(x, weight) { sum(x*weight)/sum(weight) }
 
 # Compute grid metrics for the user-defined function
-X <- pixel_metrics(las = las, ~f(Z, Intensity), 10)
+X <- pixel_metrics(las = las, func = ~f(Z, Intensity), res = 10)
 
 # Visualize the output
 plot(X, col = height.colors(50))

@@ -1,5 +1,5 @@
 ---
-title: "Select ROIs"
+title: "Regions of Interest"
 ---
 
 ```{r, echo = FALSE}
@@ -24,7 +24,7 @@ rgl::setupKnitr(autoprint = TRUE)
 
 [Code](https://github.com/tgoodbody/lidRtutorial/blob/main/code/tutorials/02_roi.R)
 
-[lidRbook](https://r-lidar.github.io/lidRbook/engine.html#engine-clip)
+[lidRbook section](https://r-lidar.github.io/lidRbook/engine.html#engine-clip)
 
 ## Overview
 
@@ -35,9 +35,8 @@ This code demonstrates the selection of regions of interest from LiDAR data. Sim
 ```{r clear warnings, warnings = FALSE, message=FALSE}
 # Clear environment and specific warnings
 rm(list = ls(globalenv()))
-options("rgdal_show_exportToProj4_warnings"="none")
 
-# Load libraries
+# Load packages
 library(lidR)
 library(sf)
 ```
@@ -109,12 +108,16 @@ plots <- clip_circle(las = las, xcenter = x, ycenter = y, radius = 10)
 ``` r
 # Plot each of the multiple circular areas
 plot(plots[[1]])
-plot(plots[[2]])
 ```
 
 ```{r plot_1, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the LiDAR data with a default color palette
 plot(plots[[1]], bg = "white")
+```
+
+``` r
+# Plot each of the multiple circular areas
+plot(plots[[2]])
 ```
 
 ```{r plot_2, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
@@ -137,19 +140,26 @@ plot(las@header, map = FALSE)
 plot(planting, add = TRUE, col = "#08B5FF39")
 
 # Extract points within the planting areas using clip_roi()
-eucalyptus <- clip_roi(las, planting)
+eucalyptus <- clip_roi(las = las, geometry = planting)
+```
 
+``` r
 # Plot the extracted points within the planting areas
 plot(eucalyptus)
+```
+
+```{r plot_euc, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
+# Plot the extracted points within the planting areas
+plot(eucalyptus, bg = "white")
 ```
 
 ## Exercises and Questions
 
 Now, let's read a shapefile called `MixedEucaNatPlot.shp` using `sf::st_read()` and plot it on top of the LiDAR header plot.
 
-```{r exercises_and_questions, warning=FALSE, message=FALSE}
+``` r
 # Read the shapefile "MixedEucaNatPlot.shp" using st_read()
-plots <- sf::st_read("data/shapefiles/MixedEucaNatPlot.shp")
+plots <- sf::st_read(dsn = "data/shapefiles/MixedEucaNatPlot.shp", quiet = TRUE)
 
 # Plot the LiDAR header information without the map
 plot(las@header, map = FALSE)
