@@ -244,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <p>We start by loading the necessary packages, clearing our current environment, and specifying that some warnings be turned off to make our outputs clearer. We will do this for each section in the tutorial.</p>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -339,7 +339,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="visualize-lidar-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-lidar-data">Visualize LiDAR Data</h3>
-<p>We can visualize the LiDAR data using the <code>plot()</code> function. We have several options to control the colors in the plot, such as selecting specific attributes from the data to be used as colors. To set the background of plots to white, use <code>plot(las, bg = "white")</code>. To keep the code clean, I’ve omitted that from examples.</p>
+<p>We can visualize the LiDAR data using the <code>plot()</code> function. We have several options to control the colors in the plot, such as selecting specific attributes from the data to be used as colors.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<code>lidR</code> plot background colour
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Set the background of plots to white using <code>plot(las, bg = "white")</code>. To keep the code clean I’ve omitted it from examples.</p>
+</div>
+</div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(las)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">

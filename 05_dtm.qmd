@@ -55,6 +55,8 @@ Here, we load the LiDAR data and exclude points flagged as withheld.
 
 ### Visualizing LiDAR Data
 
+We start by visualizing the entire LiDAR point cloud to get an initial overview.
+
 ``` r
 plot(las)
 ```
@@ -64,7 +66,7 @@ plot(las)
 plot(las, bg = "white")
 ```
 
-We start by visualizing the entire LiDAR point cloud to get an initial overview.
+Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.
 
 ``` r
 plot(las, color = "Classification")
@@ -75,20 +77,18 @@ plot(las, color = "Classification")
 plot(las, color = "Classification", bg = "white")
 ```
 
-Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.
-
 ### Triangulation Algorithm - `tin()`
+
+We create a DTM using the TIN algorithm with a specified resolution (1 meter).
 
 ```{r dtm_triangulation}
 # Generate a DTM using the TIN (Triangulated Irregular Network) algorithm
 dtm_tin <- grid_terrain(las = las, res = 1, algorithm = tin())
 ```
 
-We create a DTM using the TIN algorithm with a specified resolution (1 meter).
-
 ### Visualizing DTM in 3D
 
-To better ceonceptualize the terrain, we visualize the generated DTM in a 3D plot.
+To better conceptualize the terrain, we visualize the generated DTM in a 3D plot.
 
 ``` r
 # Visualize the DTM in 3D
@@ -130,6 +130,12 @@ Next, we generate a DTM using the IDW algorithm to compare results with the TIN-
 # Generate a DTM using the IDW (Inverse-Distance Weighting) algorithm
 dtm_idw <- grid_terrain(las = las, res = 1, algorithm = knnidw())
 ```
+
+::: callout-note
+## Degenerated points
+
+A degenerated point in LiDAR data refers to a point with identical XY(Z) coordinates as another point. This means two or more points occupy exactly the same location in XY/3D space. Degenerated points can cause issues in tasks like creating a digital terrain model, as they don't add new information and can lead to inconsistencies. Identifying and handling degenerated points appropriately is crucial for accurate and meaningful results.
+:::
 
 ### Visualizing IDW-based DTM in 3D
 

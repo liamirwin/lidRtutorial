@@ -7,7 +7,7 @@ library(terra)
 library(future)
 
 # Read a LAS catalog
-ctg <- readLAScatalog(folder = "data/Farm_A/")
+ctg <- readLAScatalog(folder = "data/Farm_A/", filter = "-drop_withheld")
 
 # Inspect the first LAS file in the catalog
 las_file <- ctg$filename[1]
@@ -19,7 +19,7 @@ plot(las, bg = "white")
 
 # Read a LAS file from the catalog and filter surface points
 las_file <- ctg$filename[16]
-las <- readLAS(files = las_file, filter = "-drop_withheld -drop_z_below 0 -drop_z_above 40")
+las <- readLAS(files = las_file, filter = "-drop_z_below 0 -drop_z_above 40")
 surflas <- filter_surfacepoints(las = las, res = 1)
 
 # Visualize the LiDAR data with a default color palette
@@ -28,6 +28,7 @@ plot(las, bg = "white")
 # Visualize the surface points using a default color palette
 plot(surflas, bg = "white")
 
+# Generate Area-based metrics
 ri <- pixel_metrics(las = las, func = ~rumple_index(X,Y,Z), res = 10)
 plot(ri)
 
@@ -75,7 +76,7 @@ routine_rumple <- function(chunk, res1 = 10, res2 = 1){
 
 # Set catalog options
 opt_select(ctg) <- "xyz"
-opt_filter(ctg) <- "-drop_withheld -drop_z_below 0 -drop_z_above 40"
+opt_filter(ctg) <- "-drop_z_below 0 -drop_z_above 40"
 opt_chunk_buffer(ctg) <- 0
 opt_chunk_size(ctg) <- 0
 
@@ -129,6 +130,13 @@ plot(m)
 
 # End parallel processing
 future::plan(sequential)
+
+# Instructions for cleaning up any existing .lax files
+# (Note: Please replace 'path' with the appropriate path)
+path <- "data/Farm_A/"
+file_list <- list.files(path)
+delete_lax <- file_list[grep("\\.lax$", file_list)]
+file.remove(file.path(path, delete_lax))
 
 ##############################
 ##  Exercises and Questions ##

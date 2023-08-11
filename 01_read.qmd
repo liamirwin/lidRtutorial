@@ -70,7 +70,13 @@ format(object.size(las), "Mb")
 
 ### Visualize LiDAR Data
 
-We can visualize the LiDAR data using the `plot()` function. We have several options to control the colors in the plot, such as selecting specific attributes from the data to be used as colors. To set the background of plots to white, use `plot(las, bg = "white")`. To keep the code clean, I've omitted that from examples.
+We can visualize the LiDAR data using the `plot()` function. We have several options to control the colors in the plot, such as selecting specific attributes from the data to be used as colors.
+
+::: callout-tip
+## `lidR` plot background colour
+
+Set the background of plots to white using `plot(las, bg = "white")`. To keep the code clean I've omitted it from examples.
+:::
 
 ``` r
 plot(las)

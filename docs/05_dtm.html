@@ -253,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="environment" class="level2">
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -273,6 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="visualizing-lidar-data" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-lidar-data">Visualizing LiDAR Data</h3>
+<p>We start by visualizing the entire LiDAR point cloud to get an initial overview.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(las)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">
@@ -283,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>We start by visualizing the entire LiDAR point cloud to get an initial overview.</p>
+<p>Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(las, <span class="at">color =</span> <span class="st">"Classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">
@@ -294,21 +295,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Visualizing the LiDAR data again, this time to distinguish ground points (blue) more effectively.</p>
 </section>
 <section id="triangulation-algorithm---tin" class="level3">
 <h3 class="anchored" data-anchor-id="triangulation-algorithm---tin">Triangulation Algorithm - <code>tin()</code></h3>
+<p>We create a DTM using the TIN algorithm with a specified resolution (1 meter).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a DTM using the TIN (Triangulated Irregular Network) algorithm</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dtm_tin <span class="ot">&lt;-</span> <span class="fu">grid_terrain</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="dv">1</span>, <span class="at">algorithm =</span> <span class="fu">tin</span>())</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: There were 37 degenerated ground points. Some X Y coordinates were</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; repeated but with different Z coordinates. min Z were retained.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We create a DTM using the TIN algorithm with a specified resolution (1 meter).</p>
 </section>
 <section id="visualizing-dtm-in-3d" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-dtm-in-3d">Visualizing DTM in 3D</h3>
-<p>To better ceonceptualize the terrain, we visualize the generated DTM in a 3D plot.</p>
+<p>To better conceptualize the terrain, we visualize the generated DTM in a 3D plot.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the DTM in 3D</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_dtm3d</span>(dtm_tin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
@@ -348,6 +348,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dtm_idw <span class="ot">&lt;-</span> <span class="fu">grid_terrain</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="dv">1</span>, <span class="at">algorithm =</span> <span class="fu">knnidw</span>())</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: There were 37 degenerated ground points. Some X Y coordinates were</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; repeated but with different Z coordinates. min Z were retained.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Degenerated points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A degenerated point in LiDAR data refers to a point with identical XY(Z) coordinates as another point. This means two or more points occupy exactly the same location in XY/3D space. Degenerated points can cause issues in tasks like creating a digital terrain model, as they don’t add new information and can lead to inconsistencies. Identifying and handling degenerated points appropriately is crucial for accurate and meaningful results.</p>
+</div>
 </div>
 </section>
 <section id="visualizing-idw-based-dtm-in-3d" class="level3">

@@ -50,7 +50,8 @@ In this section, we will cover the basic usage of the `lidR` package, including 
 We begin by creating a LAS catalog (`ctg`) from a folder containing multiple LAS files using the `readLAScatalog` function.
 
 ```{r read_catalog}
-ctg <- readLAScatalog(folder = "data/Farm_A/")
+# Read catalog and drop withheld
+ctg <- readLAScatalog(folder = "data/Farm_A/",filter = "-drop_withheld")
 ```
 
 ### Inspect catalog
@@ -100,7 +101,7 @@ las_check(las = ctg)
 
 We explore indexing of `LAScatalog` objects for efficient processing.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, results = FALSE}
 # Instructions for cleaning up any existing .lax files
 # (Note: Please replace 'path' with the appropriate path)
 path <- "data/Farm_A/"
@@ -120,20 +121,12 @@ lidR:::catalog_laxindex(ctg)
 is.indexed(ctg)
 ```
 
-```{r, echo = FALSE}
-# Instructions for cleaning up any existing .lax files
-# (Note: Please replace 'path' with the appropriate path)
-path <- "data/Farm_A/"
-file_list <- list.files(path)
-delete_lax <- file_list[grep("\\.lax$", file_list)]
-file.remove(file.path(path, delete_lax))
-```
-
 ## Generate CHM
 
 We create a CHM by rasterizing the point cloud data from the catalog.
 
 ```{r generate_chm}
+# Generate CHM
 chm <- rasterize_canopy(las = ctg, res = 0.5, algorithm = p2r(subcircle = 0.15))
 plot(chm, col = height.colors(50))
 ```
@@ -151,7 +144,7 @@ We explore and manipulate catalog options.
 
 ```{r catalog_options}
 # Setting options and re-rasterizing the CHM
-opt_filter(ctg) <- "-drop_withheld -drop_z_below 0 -drop_z_above 40"
+opt_filter(ctg) <- "-drop_z_below 0 -drop_z_above 40"
 opt_select(ctg) <- "xyz"
 chm <- rasterize_canopy(las = ctg, res = 0.5, algorithm = p2r(subcircle = 0.15))
 plot(chm, col = height.colors(50))
@@ -161,19 +154,12 @@ plot(chm, col = height.colors(50))
 
 In this section, we generate Above Ground Biomass (ABA) estimates using the LAScatalog.
 
-### Set catalog options
-
-We configure catalog options to prepare for ABA estimation.
-
-```{r set_catalog_options_aba}
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
-```
-
 ### Generate ABA output and visualize
 
 We calculate ABA using the `pixel_metrics` function and visualize the results.
 
 ```{r generate_aba}
+# Generate area-based metrics
 model <- pixel_metrics(las = ctg, func = ~max(Z), res = 20)
 plot(model, col = height.colors(50))
 ```
@@ -183,7 +169,7 @@ plot(model, col = height.colors(50))
 We adjust the catalog options to calculate ABA based on first returns only.
 
 ```{r generate_aba_first_returns}
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40 -keep_first"
+opt_filter(ctg) <- "-drop_z_below 0 -drop_z_above 40 -keep_first"
 model <- pixel_metrics(las = ctg, func = ~max(Z), res = 20)
 plot(model, col = height.colors(50))
 ```
@@ -236,7 +222,7 @@ las_check(rois[[3]])
 
 We read an individual LAS file as a catalog and perform operations on it.
 
-```{r delete_dems, echo = FALSE}
+```{r delete_dems, echo = FALSE, results = FALSE}
 # Instructions for cleaning up any existing .lax files
 # (Note: Please replace 'path' with the appropriate path)
 path <- paste0(tempdir())
@@ -291,7 +277,7 @@ In this section, we explore Individual Tree Detection (ITD) using the `LAScatalo
 
 ```{r set_catalog_options_itd}
 # Set catalog options
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
+opt_filter(ctg) <- "-drop_withheld -drop_z_below 0 -drop_z_above 40"
 ```
 
 ### Detect treetops and visualize
@@ -339,7 +325,6 @@ We specify catalog options for parallel processing.
 
 ```{r specify_catalog_options_parallel}
 # Specify options
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
 opt_select(ctg) <- "xyz"
 opt_chunk_size(ctg) <- 300
 opt_chunk_buffer(ctg) <- 10
@@ -396,7 +381,10 @@ This concludes the tutorial on basic usage, catalog validation, indexing, CHM ge
 
 ## Exercises and Questions
 
+::: callout-tip
 This exercise is complex because it involves options not yet described. Be sure to use the [lidRbook](https://r-lidar.github.io/lidRbook/) and [package documentation](https://cran.r-project.org/web/packages/lidR/lidR.pdf).
+:::
+
 
 Using:
 

@@ -129,6 +129,12 @@ plot(plots[[2]], bg = "white")
 
 In this section, we demonstrate how to extract complex geometries from shapefiles using the `clip_roi()` function from the `lidR` package.
 
+::: callout-caution
+## Legacy packages
+
+`maptools`, `rgdal`, and `rgeos`, underpinning the `sp` package, will retire in October 2023. Please refer to R-spatial evolution reports for details, especially https://r-spatial.org/r/2023/05/15/evolution4.html.
+:::
+
 ```{r extraction_complex_geometries_sf, warning=FALSE, message=FALSE}
 # Load the shapefile using sf
 planting <- sf::st_read(dsn = "data/shapefiles/MixedEucaNat.shp", quiet = TRUE)

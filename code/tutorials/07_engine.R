@@ -5,7 +5,8 @@ rm(list = ls(globalenv()))
 library(lidR)
 library(sf)
 
-ctg <- readLAScatalog(folder = "data/Farm_A/")
+# Read catalog and drop withheld
+ctg <- readLAScatalog(folder = "data/Farm_A/", filter = "-drop_withheld")
 
 ctg
 
@@ -42,13 +43,6 @@ lidR:::catalog_laxindex(ctg)
 # check if files have .lax
 is.indexed(ctg)
 
-# Instructions for cleaning up any existing .lax files
-# (Note: Please replace 'path' with the appropriate path)
-path <- "data/Farm_A/"
-file_list <- list.files(path)
-delete_lax <- file_list[grep("\\.lax$", file_list)]
-file.remove(file.path(path, delete_lax))
-
 chm <- rasterize_canopy(las = ctg, res = 0.5, algorithm = p2r(subcircle = 0.15))
 plot(chm, col = height.colors(50))
 
@@ -56,17 +50,16 @@ plot(chm, col = height.colors(50))
 warnings()
 
 # Setting options and re-rasterizing the CHM
-opt_filter(ctg) <- "-drop_withheld -drop_z_below 0 -drop_z_above 40"
+opt_filter(ctg) <- "-drop_z_below 0 -drop_z_above 40"
 opt_select(ctg) <- "xyz"
 chm <- rasterize_canopy(las = ctg, res = 0.5, algorithm = p2r(subcircle = 0.15))
 plot(chm, col = height.colors(50))
 
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
-
+# Generate area-based metrics
 model <- pixel_metrics(las = ctg, func = ~max(Z), res = 20)
 plot(model, col = height.colors(50))
 
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40 -keep_first"
+opt_filter(ctg) <- "-drop_z_below 0 -drop_z_above 40 -keep_first"
 model <- pixel_metrics(las = ctg, func = ~max(Z), res = 20)
 plot(model, col = height.colors(50))
 
@@ -90,7 +83,7 @@ plot(rois[[3]], bg = "white")
 las_check(rois[[1]])
 las_check(rois[[3]])
 
-# Instructions for cleaning up any existing .lax files
+# Instructions for cleaning up any existing files
 # (Note: Please replace 'path' with the appropriate path)
 path <- paste0(tempdir())
 file_list <- list.files(path)
@@ -132,7 +125,7 @@ file <- file_list[grep("\\.tif$", file_list)][[1]]
 plot(terra::rast(file))
 
 # Set catalog options
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
+opt_filter(ctg) <- "-drop_withheld -drop_z_below 0 -drop_z_above 40"
 
 # Detect tree tops and plot
 ttops <- locate_trees(las = ctg, algorithm = lmf(ws = 3, hmin = 5))
@@ -152,7 +145,6 @@ plot(ttops, add = TRUE, cex = 0.1, col = "black")
 library(future)
 
 # Specify options
-opt_filter(ctg) <- "-drop_withheld  -drop_z_below 0 -drop_z_above 40"
 opt_select(ctg) <- "xyz"
 opt_chunk_size(ctg) <- 300
 opt_chunk_buffer(ctg) <- 10

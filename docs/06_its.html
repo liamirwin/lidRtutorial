@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="environment" class="level2">
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -383,6 +383,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>After segmentation, we count the number of trees detected and visualize all the trees in the point cloud. We then select two trees (<code>tree25</code> and <code>tree125</code>) and visualize them individually.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Degenerated points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Forests are <strong>highly</strong> variable! This means that some algorithms and parameters will work better than others depending on the data you have. Play around with algorithms and see which works best for your data.</p>
+</div>
+</div>
 </section>
 <section id="working-with-rasters" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-rasters">Working with rasters</h2>
@@ -587,7 +600,7 @@ Tree segmentation: 100% (1 threads)</code></pre>
 </section>
 <section id="applying-user-defined-functions" class="level2">
 <h2 class="anchored" data-anchor-id="applying-user-defined-functions">Applying user-defined functions</h2>
-<p>We can map any user-defined function at the tree level using the <code>crown_metrics()</code> function, just like <code>grid_metrics()</code>.</p>
+<p>We can map any user-defined function at the tree level using the <code>crown_metrics()</code> function, just like <code>grid_metrics()</code>. Here, we calculate the convex hull area of each tree using a custom function <code>f()</code> and then visualize the results.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User defined function for area calculation</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
@@ -640,7 +653,19 @@ Tree segmentation: 100% (1 threads)</code></pre>
 </div>
 </div>
 </div>
-<p>Here, we calculate the convex hull area of each tree using a custom function <code>f()</code> and then visualize the results.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+3rd party metric packages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that you can use 3rd party packages like <a href="https://github.com/ptompalski/lidRmetrics"><code>lidRmetrics</code></a> for crown metrics too!</p>
+</div>
+</div>
 </section>
 <section id="using-pre-defined-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="using-pre-defined-metrics">Using pre-defined metrics</h2>

@@ -197,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#catalog_apply---example-2" id="toc-catalog_apply---example-2" class="nav-link" data-scroll-target="#catalog_apply---example-2"><code>catalog_apply()</code> - Example 2</a>
   <ul class="collapse">
-  <li><a href="#defining-routine-for-tree-detection-and-metrics" id="toc-defining-routine-for-tree-detection-and-metrics" class="nav-link" data-scroll-target="#defining-routine-for-tree-detection-and-metrics">Defining Routine for Tree Detection and Metrics</a></li>
+  <li><a href="#defining-routines-for-tree-detection-and-metrics" id="toc-defining-routines-for-tree-detection-and-metrics" class="nav-link" data-scroll-target="#defining-routines-for-tree-detection-and-metrics">Defining Routines for Tree Detection and Metrics</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
@@ -246,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="environment" class="level2">
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -309,6 +309,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="visualizing-lidar-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-lidar-data-1">Visualizing LiDAR Data</h3>
 <p>We visualize the selected LiDAR data, including both the original data and the surface points.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the LiDAR data with a default color palette</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(las)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -318,6 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the surface points using a default color palette</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(surflas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-layout-align="center" data-rgl="true">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -332,8 +336,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="calculating-rumple-index">Calculating Rumple Index</h3>
 <p>We calculate the rumple index using the <code>pixel_metrics()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), <span class="at">res =</span> <span class="dv">10</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate Area-based metrics</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), <span class="at">res =</span> <span class="dv">10</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -351,112 +356,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="basic-usage-of-the-catalog_apply-function">Basic Usage of the <code>catalog_apply()</code> Function</h3>
 <p>We demonstrate the basic usage of the <code>catalog_apply()</code> function with a simple user-defined function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined function for processing chunks</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>routine <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk){</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(chunk)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform computation</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="at">func =</span> <span class="sc">~</span><span class="fu">max</span>(Z), <span class="at">res =</span> <span class="dv">20</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> m, terra<span class="sc">::</span><span class="fu">ext</span>(chunk))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize parallel processing</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify catalog options</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_filter</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"-drop_withheld"</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply routine to catalog</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ✓</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 2 of 25 (8%): state ✓</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 3 of 25 (12%): state ✓</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 4 of 25 (16%): state ✓</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 5 of 25 (20%): state ✓</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 6 of 25 (24%): state ✓</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 7 of 25 (28%): state ✓</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 8 of 25 (32%): state ✓</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 9 of 25 (36%): state ✓</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 10 of 25 (40%): state ✓</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 11 of 25 (44%): state ✓</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 12 of 25 (48%): state ✓</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 13 of 25 (52%): state ✓</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 14 of 25 (56%): state ✓</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 15 of 25 (60%): state ✓</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 16 of 25 (64%): state ✓</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 17 of 25 (68%): state ✓</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (72%): state ✓</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 19 of 25 (76%): state ✓</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (80%): state ✓</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 21 of 25 (84%): state ✓</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 22 of 25 (88%): state ✓</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (92%): state ✓</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 24 of 25 (96%): state ✓</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 25 of 25 (100%): state ✓</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the output list</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>out[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357280, 7357420  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  8.13 </span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 62.81 </span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357420, 7357560  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :   V1 </span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  6.4 </span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 58.8 </span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357560, 7357700  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  9.24 </span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 30.68 </span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357700, 7357840  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   : 23.23 </span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 89.93 </span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[5]]</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357840, 7357980  (xmin, xmax, ymin, ymax)</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   : 24.65 </span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 28.51</span></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the engine-supported method for merging</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined function for processing chunks</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>routine <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk){</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(chunk)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Perform computation</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="at">func =</span> <span class="sc">~</span><span class="fu">max</span>(Z), <span class="at">res =</span> <span class="dv">20</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> m, terra<span class="sc">::</span><span class="fu">ext</span>(chunk))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize parallel processing</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify catalog options</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_filter</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"-drop_withheld"</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply routine to catalog</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ✓</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 2 of 25 (8%): state ✓</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 3 of 25 (12%): state ✓</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 4 of 25 (16%): state ✓</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 5 of 25 (20%): state ✓</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 6 of 25 (24%): state ✓</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 8 of 25 (28%): state ✓</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 7 of 25 (32%): state ✓</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 9 of 25 (36%): state ✓</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 10 of 25 (40%): state ✓</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 11 of 25 (44%): state ✓</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 12 of 25 (48%): state ✓</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 13 of 25 (52%): state ✓</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 14 of 25 (56%): state ✓</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 15 of 25 (60%): state ✓</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 16 of 25 (64%): state ✓</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 17 of 25 (68%): state ✓</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (72%): state ✓</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 19 of 25 (76%): state ✓</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (80%): state ✓</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 21 of 25 (84%): state ✓</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 22 of 25 (88%): state ✓</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (92%): state ✓</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 24 of 25 (96%): state ✓</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 25 of 25 (100%): state ✓</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the output list</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>out[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357280, 7357420  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  8.13 </span></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 62.81 </span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357420, 7357560  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :   V1 </span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  6.4 </span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 58.8 </span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357560, 7357700  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   :  9.24 </span></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 30.68 </span></span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357700, 7357840  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   : 23.23 </span></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 89.93 </span></span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [[5]]</span></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; class       : SpatRaster </span></span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dimensions  : 7, 7, 1  (nrow, ncol, nlyr)</span></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; resolution  : 20, 20  (x, y)</span></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; extent      : 207340, 207480, 7357840, 7357980  (xmin, xmax, ymin, ymax)</span></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coord. ref. : SIRGAS 2000 / UTM zone 23S (EPSG:31983) </span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; source(s)   : memory</span></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name        :    V1 </span></span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; min value   : 24.65 </span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; max value   : 28.51</span></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the engine-supported method for merging</span></span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -487,8 +492,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; Chunk 21 of 25 (84%): state ✓
 #&gt; Chunk 22 of 25 (88%): state ✓
 #&gt; Chunk 23 of 25 (92%): state ✓
-#&gt; Chunk 25 of 25 (96%): state ✓
-#&gt; Chunk 24 of 25 (100%): state ✓
+#&gt; Chunk 24 of 25 (96%): state ✓
+#&gt; Chunk 25 of 25 (100%): state ✓
 print(out)
 #&gt; class       : SpatRaster 
 #&gt; dimensions  : 35, 35, 1  (nrow, ncol, nlyr)
@@ -505,30 +510,30 @@ print(out)
 <h3 class="anchored" data-anchor-id="user-defined-functions-for-processing">User-Defined Functions for Processing</h3>
 <p>We demonstrate the use of user-defined functions to process LiDAR data within a catalog.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined function for rumple index calculation</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>routine_rumple <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="dv">1</span>){</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span>  <span class="fu">readLAS</span>(chunk)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ext</span>(chunk)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(<span class="at">las =</span> las, <span class="at">res =</span> res2)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ri  <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), res1)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> ri, <span class="at">y =</span> bbox)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Set catalog options</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_select</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"xyz"</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_filter</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"-drop_withheld -drop_z_below 0 -drop_z_above 40"</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_buffer</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_size</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify options for merging</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>, <span class="at">alignment =</span> <span class="dv">10</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the user-defined function to the catalog</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_rumple, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="fl">0.5</span>, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined function for rumple index calculation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>routine_rumple <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="dv">1</span>){</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span>  <span class="fu">readLAS</span>(chunk)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">ext</span>(chunk)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(<span class="at">las =</span> las, <span class="at">res =</span> res2)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ri  <span class="ot">&lt;-</span> <span class="fu">pixel_metrics</span>(<span class="at">las =</span> las, <span class="sc">~</span><span class="fu">rumple_index</span>(X,Y,Z), res1)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">crop</span>(<span class="at">x =</span> ri, <span class="at">y =</span> bbox)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Set catalog options</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_select</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"xyz"</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_filter</span>(ctg) <span class="ot">&lt;-</span> <span class="st">"-drop_withheld -drop_z_below 0 -drop_z_above 40"</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_buffer</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_size</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify options for merging</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>, <span class="at">alignment =</span> <span class="dv">10</span>)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the user-defined function to the catalog</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_rumple, <span class="at">res1 =</span> <span class="dv">10</span>, <span class="at">res2 =</span> <span class="fl">0.5</span>, <span class="at">.options =</span> options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -577,119 +582,118 @@ plot(ri, col = height.colors(50))</code></pre>
 <section id="catalog_apply---example-2" class="level2">
 <h2 class="anchored" data-anchor-id="catalog_apply---example-2"><code>catalog_apply()</code> - Example 2</h2>
 <p>In this section, we provide another example of using the <code>catalog_apply()</code> function to detect trees and calculate metrics on a catalog.</p>
-<section id="defining-routine-for-tree-detection-and-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="defining-routine-for-tree-detection-and-metrics">Defining Routine for Tree Detection and Metrics</h3>
-<p>We define a routine that detects trees, calculates metrics, and</p>
-<p>returns relevant data.</p>
+<section id="defining-routines-for-tree-detection-and-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="defining-routines-for-tree-detection-and-metrics">Defining Routines for Tree Detection and Metrics</h3>
+<p>We define a routine that detects trees, calculates metrics, and returns relevant data.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined routine for tree detection and metrics</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>routine_trees <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk) {</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Read in the chunk and check for emptiness</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(chunk)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the chunk bounding box</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(<span class="at">obj =</span> chunk)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter surface points and create canopy height model (CHM)</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(las, <span class="at">res =</span> <span class="fl">0.5</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  chm <span class="ot">&lt;-</span> <span class="fu">rasterize_canopy</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="fl">0.5</span>, <span class="at">algorithm =</span> <span class="fu">p2r</span>())</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Detect and segment trees</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  ttops <span class="ot">&lt;-</span> <span class="fu">locate_trees</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> <span class="fu">lmf</span>(<span class="at">ws =</span> <span class="dv">3</span>, <span class="at">hmin =</span> <span class="dv">5</span>))</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  las_trees <span class="ot">&lt;-</span> <span class="fu">segment_trees</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> <span class="fu">dalponte2016</span>(<span class="at">chm =</span> chm, <span class="at">treetops =</span> ttops))</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate metrics for each tree</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">crown_metrics</span>(<span class="at">las =</span> las_trees, <span class="at">func =</span> .stdtreemetrics)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(<span class="at">x =</span> p, <span class="at">y =</span> bbox)</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Delineate convex hulls</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">delineate_crowns</span>(las_trees)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> m[m<span class="sc">$</span>treeID <span class="sc">%in%</span> p<span class="sc">$</span>treeID,]</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Set options for the catalog</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_buffer</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>) <span class="co"># Merge all outputs</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to the catalog</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_trees, <span class="at">.options =</span> options)</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ⚠</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 2 of 25 (8%): state ⚠</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 3 of 25 (12%): state ⚠</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 4 of 25 (16%): state ⚠</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 5 of 25 (20%): state ⚠</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 6 of 25 (24%): state ⚠</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 7 of 25 (28%): state ⚠</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 8 of 25 (32%): state ⚠</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 9 of 25 (36%): state ⚠</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 10 of 25 (40%): state ⚠</span></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 11 of 25 (44%): state ⚠</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 12 of 25 (48%): state ⚠</span></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 13 of 25 (52%): state ⚠</span></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 14 of 25 (56%): state ⚠</span></span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 15 of 25 (60%): state ⚠</span></span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 16 of 25 (64%): state ⚠</span></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 17 of 25 (68%): state ⚠</span></span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (72%): state ⚠</span></span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (76%): state ⚠</span></span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 19 of 25 (80%): state ⚠</span></span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 21 of 25 (84%): state ⚠</span></span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 22 of 25 (88%): state ⚠</span></span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 24 of 25 (92%): state ⚠</span></span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (96%): state ⚠</span></span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># User-defined routine for tree detection and metrics</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>routine_trees <span class="ot">&lt;-</span> <span class="cf">function</span>(chunk) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Read in the chunk and check for emptiness</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">readLAS</span>(chunk)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.empty</span>(las)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the chunk bounding box</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  bbox <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(<span class="at">obj =</span> chunk)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter surface points and create canopy height model (CHM)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  las <span class="ot">&lt;-</span> <span class="fu">filter_surfacepoints</span>(las, <span class="at">res =</span> <span class="fl">0.5</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  chm <span class="ot">&lt;-</span> <span class="fu">rasterize_canopy</span>(<span class="at">las =</span> las, <span class="at">res =</span> <span class="fl">0.5</span>, <span class="at">algorithm =</span> <span class="fu">p2r</span>())</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Detect and segment trees</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ttops <span class="ot">&lt;-</span> <span class="fu">locate_trees</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> <span class="fu">lmf</span>(<span class="at">ws =</span> <span class="dv">3</span>, <span class="at">hmin =</span> <span class="dv">5</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  las_trees <span class="ot">&lt;-</span> <span class="fu">segment_trees</span>(<span class="at">las =</span> las, <span class="at">algorithm =</span> <span class="fu">dalponte2016</span>(<span class="at">chm =</span> chm, <span class="at">treetops =</span> ttops))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate metrics for each tree</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">crown_metrics</span>(<span class="at">las =</span> las_trees, <span class="at">func =</span> .stdtreemetrics)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_crop</span>(<span class="at">x =</span> p, <span class="at">y =</span> bbox)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Delineate convex hulls</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">delineate_crowns</span>(las_trees)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> m[m<span class="sc">$</span>treeID <span class="sc">%in%</span> p<span class="sc">$</span>treeID,]</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Set options for the catalog</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="fu">opt_chunk_buffer</span>(ctg) <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">automerge =</span> <span class="cn">TRUE</span>) <span class="co"># Merge all outputs</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to the catalog</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">catalog_apply</span>(<span class="at">ctg =</span> ctg, <span class="at">FUN =</span> routine_trees, <span class="at">.options =</span> options)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 1 of 25 (4%): state ⚠</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 2 of 25 (8%): state ⚠</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 3 of 25 (12%): state ⚠</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 4 of 25 (16%): state ⚠</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 5 of 25 (20%): state ⚠</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 6 of 25 (24%): state ⚠</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 7 of 25 (28%): state ⚠</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 8 of 25 (32%): state ⚠</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 9 of 25 (36%): state ⚠</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 10 of 25 (40%): state ⚠</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 11 of 25 (44%): state ⚠</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 12 of 25 (48%): state ⚠</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 13 of 25 (52%): state ⚠</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 14 of 25 (56%): state ⚠</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 15 of 25 (60%): state ⚠</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 16 of 25 (64%): state ⚠</span></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 17 of 25 (68%): state ⚠</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 18 of 25 (72%): state ⚠</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 19 of 25 (76%): state ⚠</span></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 20 of 25 (80%): state ⚠</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 21 of 25 (84%): state ⚠</span></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 22 of 25 (88%): state ⚠</span></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 23 of 25 (92%): state ⚠</span></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Chunk 25 of 25 (96%): state ⚠</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: attribute variables are assumed to be spatially constant throughout</span></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; all geometries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -697,7 +701,7 @@ plot(ri, col = height.colors(50))</code></pre>
 </figure>
 </div>
 </div>
-<pre><code>#&gt; Chunk 25 of 25 (100%): state ⚠
+<pre><code>#&gt; Chunk 24 of 25 (100%): state ⚠
 
 # View and visualize the output
 m
@@ -717,9 +721,22 @@ plot(m)</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># End parallel processing</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>future<span class="sc">::</span><span class="fu">plan</span>(sequential)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># End parallel processing</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>future<span class="sc">::</span><span class="fu">plan</span>(sequential)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Thinking outside the box
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The LAScatalog engine is versatile! The functions that can be applied to LiDAR data are infinite - leverage the flexibility of <code>lidR</code> and create software that pushes the boundaries of research in forest inventory and management!</p>
+</div>
 </div>
 </section>
 </section>
@@ -729,7 +746,7 @@ plot(m)</code></pre>
 <h4 class="anchored" data-anchor-id="e1.">E1.</h4>
 <p>Understanding Chunk Filtering</p>
 <p>On line 111 (routine_trees function) <code>m &lt;- m[m$treeID %in% p$treeID,]</code> is used. Explain the purpose of this line. To understand its impact, modify the function to exclude this line and observe the results. You can use the <code>catalog_select()</code> function to choose a subset of tiles for testing.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>subctg <span class="ot">&lt;-</span> <span class="fu">catalog_select</span>(ctg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>subctg <span class="ot">&lt;-</span> <span class="fu">catalog_select</span>(ctg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="e2." class="level4">
 <h4 class="anchored" data-anchor-id="e2.">E2.</h4>
@@ -749,14 +766,17 @@ plot(m)</code></pre>
 <li>Apply the function to a collection of LAS files.</li>
 <li>Visualize the results using the flightlines’ shapefile.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>flightlines <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/flightlines.shp"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(flightlines, <span class="at">col =</span> <span class="fu">sf.colors</span>(<span class="dv">6</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>))</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(flightlines[<span class="dv">3</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>flightlines <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/flightlines.shp"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(flightlines, <span class="at">col =</span> <span class="fu">sf.colors</span>(<span class="dv">6</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(flightlines[<span class="dv">3</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>This concludes the tutorial on using the <code>catalog_apply</code> function in the <code>lidR</code> package to efficiently process LAS data within a catalog.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
 
 
 </section>

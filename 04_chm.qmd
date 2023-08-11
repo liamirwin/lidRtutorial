@@ -159,7 +159,7 @@ The `subcircle` option can be used with the pit-free algorithm to create finer C
 
 ## Post-Processing
 
-Usually, CHMs can be post-processed by smoothing or other manipulations. Here, we demonstrate post-processing using the `terra` package and the `focal()` function for smoothing.
+Usually, CHMs can be post-processed by smoothing or other manipulations. Here, we demonstrate post-processing using the `terra::focal()` function for smoothing.
 
 ```{r post_processing}
 # Post-process the CHM using the 'terra' package and focal() function for smoothing
@@ -169,8 +169,6 @@ schm <- terra::focal(chm, w = ker, fun = mean, na.rm = TRUE)
 # Visualize the smoothed CHM
 plot(schm, col = height.colors(50))
 ```
-
-Post-processing of CHMs often involves smoothing to improve data quality or remove noise. In this example, we use the `terra::focal()` function to perform a focal mean smoothing on the CHM, resulting in a smoother representation of the canopy height.
 
 ## Conclusion
 

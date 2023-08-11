@@ -139,6 +139,13 @@ plot(tree125, size = 4, bg = "white")
 
 After segmentation, we count the number of trees detected and visualize all the trees in the point cloud. We then select two trees (`tree25` and `tree125`) and visualize them individually.
 
+::: callout-note
+## Degenerated points
+
+Forests are __highly__ variable! This means that some algorithms and parameters will work better than others depending on the data you have. Play around with algorithms and see which works best for your data.
+:::
+
+
 ## Working with rasters
 
 The `lidR` package is designed for point clouds, but some functions can be applied to raster data as well. Here, we show how to extract trees from the CHM without using the point cloud directly.
@@ -225,7 +232,7 @@ We calculate the number of points (`n`) in each tree crown using a user-defined 
 
 ## Applying user-defined functions
 
-We can map any user-defined function at the tree level using the `crown_metrics()` function, just like `grid_metrics()`.
+We can map any user-defined function at the tree level using the `crown_metrics()` function, just like `grid_metrics()`. Here, we calculate the convex hull area of each tree using a custom function `f()` and then visualize the results.
 
 ```{r user_defined_metrics}
 # User defined function for area calculation
@@ -255,7 +262,11 @@ metrics
 plot(metrics["A"], cex = 0.8)
 ```
 
-Here, we calculate the convex hull area of each tree using a custom function `f()` and then visualize the results.
+::: callout-tip
+## 3rd party metric packages
+
+Remember that you can use 3rd party packages like [`lidRmetrics`](https://github.com/ptompalski/lidRmetrics) for crown metrics too!
+:::
 
 ## Using pre-defined metrics
 

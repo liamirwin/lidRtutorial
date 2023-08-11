@@ -84,7 +84,11 @@ plot(metrics, "zsd", col = height.colors(50))
 
 ## Advanced Usage with User-Defined Metrics
 
-The `lidR` package provides flexibility for users to define custom metrics. Check out 3rd party packages like [lidRmetrics](https://github.com/ptompalski/lidRmetrics) for suites of metrics.
+::: callout-tip
+## 3rd party metric packages
+
+`lidR` provides flexibility for users to define custom metrics. Check out 3rd party packages like [`lidRmetrics`](https://github.com/ptompalski/lidRmetrics) for suites of metrics.
+:::
 
 ```{r user_defined_metric_pixel_metrics}
 # Generate a user-defined function to compute weighted mean

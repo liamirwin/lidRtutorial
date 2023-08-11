@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="environment" class="level2">
 <h2 class="anchored" data-anchor-id="environment">Environment</h2>
 <div class="cell" data-layout-align="center" data-warnings="false">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment and specific warnings</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="fu">globalenv</span>()))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
@@ -347,7 +347,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="advanced-usage-with-user-defined-metrics" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-usage-with-user-defined-metrics">Advanced Usage with User-Defined Metrics</h2>
-<p>The <code>lidR</code> package provides flexibility for users to define custom metrics. Check out 3rd party packages like <a href="https://github.com/ptompalski/lidRmetrics">lidRmetrics</a> for suites of metrics.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+3rd party metric packages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>lidR</code> provides flexibility for users to define custom metrics. Check out 3rd party packages like <a href="https://github.com/ptompalski/lidRmetrics"><code>lidRmetrics</code></a> for suites of metrics.</p>
+</div>
+</div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a user-defined function to compute weighted mean</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, weight) { <span class="fu">sum</span>(x<span class="sc">*</span>weight)<span class="sc">/</span><span class="fu">sum</span>(weight) }</span>

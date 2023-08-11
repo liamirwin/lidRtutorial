@@ -94,9 +94,18 @@ surflas <- filter_surfacepoints(las = las, res = 1)
 
 We visualize the selected LiDAR data, including both the original data and the surface points.
 
+```r 
+# Visualize the LiDAR data with a default color palette
+plot(las)
+```
 ```{r visualize_las_ctg2, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the LiDAR data with a default color palette
 plot(las, bg = "white")
+```
+
+```r
+# Visualize the surface points using a default color palette
+plot(surflas)
 ```
 
 ```{r visualize_surflas_ctg2, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
@@ -109,6 +118,7 @@ plot(surflas, bg = "white")
 We calculate the rumple index using the `pixel_metrics()` function.
 
 ```{r calculate_rumple}
+# Generate Area-based metrics
 ri <- pixel_metrics(las = las, ~rumple_index(X,Y,Z), res = 10)
 plot(ri)
 ```
@@ -190,11 +200,9 @@ plot(ri, col = height.colors(50))
 
 In this section, we provide another example of using the `catalog_apply()` function to detect trees and calculate metrics on a catalog.
 
-### Defining Routine for Tree Detection and Metrics
+### Defining Routines for Tree Detection and Metrics
 
-We define a routine that detects trees, calculates metrics, and
-
-returns relevant data.
+We define a routine that detects trees, calculates metrics, and returns relevant data.
 
 ```{r tree_detection_metrics}
 # User-defined routine for tree detection and metrics
@@ -240,6 +248,12 @@ plot(m)
 future::plan(sequential)
 ```
 
+::: {.callout-note}
+## Thinking outside the box
+
+The LAScatalog engine is versatile! The functions that can be applied to LiDAR data are infinite - leverage the flexibility of `lidR` and create software that pushes the boundaries of research in forest inventory and management!
+:::
+
 ## Exercises
 
 #### E1.
@@ -279,3 +293,13 @@ plot(flightlines[3,])
 ## Conclusion
 
 This concludes the tutorial on using the `catalog_apply` function in the `lidR` package to efficiently process LAS data within a catalog.
+
+
+```{r, echo = FALSE, results = FALSE}
+# Instructions for cleaning up any existing .lax files
+# (Note: Please replace 'path' with the appropriate path)
+path <- "data/Farm_A/"
+file_list <- list.files(path)
+delete_lax <- file_list[grep("\\.lax$", file_list)]
+file.remove(file.path(path, delete_lax))
+```
