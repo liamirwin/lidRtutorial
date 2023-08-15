@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   fig.align = "center")
 
-rgl::setupKnitr(autoprint = TRUE)
+rgl::setupKnitr(autoprint = TRUE) 
+options(lidR.progress = FALSE)
 ```
 
 ## Relevant resources
@@ -86,6 +87,12 @@ We create a DTM using the TIN algorithm with a specified resolution (1 meter).
 dtm_tin <- grid_terrain(las = las, res = 1, algorithm = tin())
 ```
 
+::: callout-note
+## Degenerated points
+
+A degenerated point in LiDAR data refers to a point with identical XY(Z) coordinates as another point. This means two or more points occupy exactly the same location in XY/3D space. Degenerated points can cause issues in tasks like creating a digital terrain model, as they don't add new information and can lead to inconsistencies. Identifying and handling degenerated points appropriately is crucial for accurate and meaningful results.
+:::
+
 ### Visualizing DTM in 3D
 
 To better conceptualize the terrain, we visualize the generated DTM in a 3D plot.
@@ -130,12 +137,6 @@ Next, we generate a DTM using the IDW algorithm to compare results with the TIN-
 # Generate a DTM using the IDW (Inverse-Distance Weighting) algorithm
 dtm_idw <- grid_terrain(las = las, res = 1, algorithm = knnidw())
 ```
-
-::: callout-note
-## Degenerated points
-
-A degenerated point in LiDAR data refers to a point with identical XY(Z) coordinates as another point. This means two or more points occupy exactly the same location in XY/3D space. Degenerated points can cause issues in tasks like creating a digital terrain model, as they don't add new information and can lead to inconsistencies. Identifying and handling degenerated points appropriately is crucial for accurate and meaningful results.
-:::
 
 ### Visualizing IDW-based DTM in 3D
 

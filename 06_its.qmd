@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
   fig.align = "center")
 
 rgl::setupKnitr(autoprint = TRUE)
+options(lidR.progress = FALSE)
 ```
 
 ## Relevant resources
@@ -102,7 +103,7 @@ las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = 
 
 ```{r tree_segmentation_legnth}
 # Count number of trees detected and segmented
-length(unique(las@data$treeID) |> na.omit())
+length(unique(las$treeID) |> na.omit())
 ```
 
 ``` r
@@ -140,11 +141,10 @@ plot(tree125, size = 4, bg = "white")
 After segmentation, we count the number of trees detected and visualize all the trees in the point cloud. We then select two trees (`tree25` and `tree125`) and visualize them individually.
 
 ::: callout-note
-## Degenerated points
+## Variability and testing
 
-Forests are __highly__ variable! This means that some algorithms and parameters will work better than others depending on the data you have. Play around with algorithms and see which works best for your data.
+Forests are **highly** variable! This means that some algorithms and parameters will work better than others depending on the data you have. Play around with algorithms and see which works best for your data.
 :::
-
 
 ## Working with rasters
 
@@ -232,7 +232,7 @@ We calculate the number of points (`n`) in each tree crown using a user-defined 
 
 ## Applying user-defined functions
 
-We can map any user-defined function at the tree level using the `crown_metrics()` function, just like `grid_metrics()`. Here, we calculate the convex hull area of each tree using a custom function `f()` and then visualize the results.
+We can map any user-defined function at the tree level using the `crown_metrics()` function, just like `pixel_metrics()`. Here, we calculate the convex hull area of each tree using a custom function `f()` and then visualize the results.
 
 ```{r user_defined_metrics}
 # User defined function for area calculation

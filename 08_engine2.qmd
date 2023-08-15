@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   fig.align = "center")
 
-rgl::setupKnitr(autoprint = TRUE)
+rgl::setupKnitr(autoprint = TRUE) 
+options(lidR.progress = FALSE)
 ```
 
 ## Relevant resources:
@@ -94,16 +95,17 @@ surflas <- filter_surfacepoints(las = las, res = 1)
 
 We visualize the selected LiDAR data, including both the original data and the surface points.
 
-```r 
+``` r
 # Visualize the LiDAR data with a default color palette
 plot(las)
 ```
+
 ```{r visualize_las_ctg2, echo = FALSE, rgl = TRUE, fig.width = 8, fig.height = 6}
 # Visualize the LiDAR data with a default color palette
 plot(las, bg = "white")
 ```
 
-```r
+``` r
 # Visualize the surface points using a default color palette
 plot(surflas)
 ```
@@ -248,7 +250,7 @@ plot(m)
 future::plan(sequential)
 ```
 
-::: {.callout-note}
+::: callout-note
 ## Thinking outside the box
 
 The LAScatalog engine is versatile! The functions that can be applied to LiDAR data are infinite - leverage the flexibility of `lidR` and create software that pushes the boundaries of research in forest inventory and management!
@@ -293,7 +295,6 @@ plot(flightlines[3,])
 ## Conclusion
 
 This concludes the tutorial on using the `catalog_apply` function in the `lidR` package to efficiently process LAS data within a catalog.
-
 
 ```{r, echo = FALSE, results = FALSE}
 # Instructions for cleaning up any existing .lax files

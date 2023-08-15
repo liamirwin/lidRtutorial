@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   fig.align = "center")
 
-rgl::setupKnitr(autoprint = TRUE)
+rgl::setupKnitr(autoprint = TRUE) 
+options(lidR.progress = FALSE)
 ```
 
 ## Relevant Resources

@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   fig.align = "center")
 
-rgl::setupKnitr(autoprint = TRUE)
+rgl::setupKnitr(autoprint = TRUE) 
+options(lidR.progress = FALSE)
 ```
 
 ## Relevant resources:
@@ -99,7 +100,7 @@ las_check(las = ctg)
 
 ## File indexing
 
-We explore indexing of `LAScatalog` objects for efficient processing.
+We explore indexing of `LAScatalog` objects for efficient processing. The `lidR` policy has always been: use `LAStools` and `lasindex` for spatial indexing. If you really don't want, or can't use `LAStools`, then there is a hidden function in `lidR` that users can use (`lidR:::catalog_laxindex()`).
 
 ```{r, echo = FALSE, results = FALSE}
 # Instructions for cleaning up any existing .lax files
@@ -384,7 +385,6 @@ This concludes the tutorial on basic usage, catalog validation, indexing, CHM ge
 ::: callout-tip
 This exercise is complex because it involves options not yet described. Be sure to use the [lidRbook](https://r-lidar.github.io/lidRbook/) and [package documentation](https://cran.r-project.org/web/packages/lidR/lidR.pdf).
 :::
-
 
 Using:
 
