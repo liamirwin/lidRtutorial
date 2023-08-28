@@ -2,7 +2,7 @@
 title: "Regions of Interest"
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warnings = FALSE}
 library(rgl)
 
 r3dDefaults <- rgl::r3dDefaults

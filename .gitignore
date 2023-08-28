@@ -7,3 +7,19 @@
 /_site/
 
 _freeze
+docs/01_read.html
+docs/01_read_files/figure-html/class_2-1.png
+docs/01_read_files/figure-html/corrupt-1.png
+docs/01_read_files/figure-html/first_ground-1.png
+docs/01_read_files/figure-html/visualize_lidar_data-1.png
+docs/01_read_files/figure-html/visualize_lidar_data_class-1.png
+docs/01_read_files/figure-html/visualize_lidar_data_filter-1.png
+docs/01_read_files/figure-html/visualize_lidar_data_filter_class-1.png
+docs/01_read_files/figure-html/visualize_lidar_data_int-1.png
+docs/01_read_files/figure-html/visualize_lidar_data_scan-1.png
+docs/index.html
+docs/robots.txt
+docs/search.json
+docs/site_libs/bootstrap/bootstrap.min.css
+docs/site_libs/quarto-html/quarto-syntax-highlighting.css
+docs/sitemap.xml
