@@ -30,7 +30,7 @@ plot(ttops, col = "black", add = TRUE, cex = 0.5)
 las <- segment_trees(las = las, algorithm = dalponte2016(chm = schm, treetops = ttops))
 
 # Count number of trees detected and segmented
-length(unique(las@data$treeID) |> na.omit())
+length(unique(las$treeID) |> na.omit())
 
 # Visualize using intensity values as colors
 plot(las, color = "treeID", bg = "white")

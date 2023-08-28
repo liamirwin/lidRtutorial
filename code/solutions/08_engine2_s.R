@@ -63,7 +63,7 @@ plot(m, col = rgb(0,0,1,0.3))
 #    - Hint: Dont forget about buffered points... remember lidR::filter_* functions.
 filter_noise = function(las, sensitivity)
 {
-  p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 10)
+  p95 <- pixel_metrics(las, ~quantile(Z, probs = 0.95), 10)
   las <- merge_spatial(las, p95, "p95")
   las <- filter_poi(las, Z < 1+p95*sensitivity, Z > -0.5)
   las$p95 <- NULL
