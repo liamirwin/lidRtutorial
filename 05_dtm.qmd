@@ -2,7 +2,7 @@
 title: "Digital Terrain Models"
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warnings = FALSE}
 library(rgl)
 
 r3dDefaults <- rgl::r3dDefaults
@@ -84,7 +84,7 @@ We create a DTM using the TIN algorithm with a specified resolution (1 meter).
 
 ```{r dtm_triangulation}
 # Generate a DTM using the TIN (Triangulated Irregular Network) algorithm
-dtm_tin <- grid_terrain(las = las, res = 1, algorithm = tin())
+dtm_tin <- rasterize_terrain(las = las, res = 1, algorithm = tin())
 ```
 
 ::: callout-note
@@ -135,7 +135,7 @@ Next, we generate a DTM using the IDW algorithm to compare results with the TIN-
 
 ```{r dtm_idw}
 # Generate a DTM using the IDW (Inverse-Distance Weighting) algorithm
-dtm_idw <- grid_terrain(las = las, res = 1, algorithm = knnidw())
+dtm_idw <- rasterize_terrainain(las = las, res = 1, algorithm = knnidw())
 ```
 
 ### Visualizing IDW-based DTM in 3D

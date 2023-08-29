@@ -2,7 +2,7 @@
 title: "Read/Plot/Query/Validate"
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warnings = FALSE}
 library(rgl)
 
 r3dDefaults <- rgl::r3dDefaults
