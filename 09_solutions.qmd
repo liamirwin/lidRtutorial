@@ -198,7 +198,7 @@ Compute a DTM for this plot. Which method are you choosing and why?
 
 ```{r}
 #| code-fold: true
-dtm <- grid_terrain(circ, 0.5, kriging())
+dtm <- rasterize_terrain(circ, 0.5, kriging())
 plot_dtm3d(dtm)
 ```
 
@@ -208,7 +208,7 @@ Compute a DSM (digital surface model). Hint: Look back to how you made a CHM.
 
 ```{r}
 #| code-fold: true
-dsm <- grid_canopy(circ, 1, p2r(0.1))
+dsm <- rasterize_canopy(circ, 1, p2r(0.1))
 plot(dsm, col = height.colors(50))
 ```
 
@@ -228,7 +228,7 @@ Compute a CHM.
 
 ```{r}
 #| code-fold: true
-chm <- grid_canopy(ncirc, 1, p2r(0.1))
+chm <- rasterize_canopy(ncirc, 1, p2r(0.1))
 plot(chm, col = height.colors(50))
 ```
 
@@ -293,7 +293,7 @@ Segment the trees.
 
 ```{r}
 #| code-fold: true
-chm <- grid_canopy(las = las, res = 0.5, algorithm = p2r(subcircle = 0.15))
+chm <- rasterize_canopy(las = las, res = 0.5, algorithm = p2r(subcircle = 0.15))
 plot(chm, col = col1)
 ttops <- locate_trees(las = chm, algorithm = lmf(ws = 2.5))
 las <- segment_trees(las = las, dalponte2016(chm = chm, treetops = ttops))
@@ -373,7 +373,7 @@ Generate a raster of point density for this new decimated dataset.
 ```{r}
 #| code-fold: true
 opt_output_files(newctg) <- ""
-D2 <- grid_density(las = newctg, res = 4)
+D2 <- rasterize_density(las = newctg, res = 4)
 plot(D2, col = heat.colors(50))
 ```
 
