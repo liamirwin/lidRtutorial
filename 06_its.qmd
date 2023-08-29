@@ -50,11 +50,11 @@ col2 <- pastel.colors(900)
 
 ## CHM based methods
 
-We start by creating a Canopy Height Model (CHM) from the LiDAR data. The `grid_canopy` function generates the CHM using a specified resolution (`res`) and a chosen algorithm, here `p2r(0.15)`, to compute the percentiles.
+We start by creating a Canopy Height Model (CHM) from the LiDAR data. The `rasterize_canopy` function generates the CHM using a specified resolution (`res`) and a chosen algorithm, here `p2r(0.15)`, to compute the percentiles.
 
 ```{r chm_creation}
 # Generate CHM
-chm <- grid_canopy(las = las, res = 0.5, algorithm = p2r(0.15))
+chm <- rasterize_canopy(las = las, res = 0.5, algorithm = p2r(0.15))
 plot(chm, col = col1)
 ```
 
@@ -285,10 +285,10 @@ We calculate tree-level metrics using the `.stdtreemetrics` function and visuali
 
 ## Delineating crowns
 
-The `delineate_crowns()` function segments trees and extracts metrics at the crown level.
+The `crown_metrics()` function segments trees and extracts metrics at the crown level.
 
 ```{r delineate_crowns}
-cvx_hulls <- delineate_crowns(las = las, func = .stdtreemetrics)
+cvx_hulls <- crown_metrics(las = las, func = .stdtreemetrics, geom = 'convex')
 cvx_hulls
 
 plot(cvx_hulls)
@@ -299,7 +299,7 @@ plot(x = cvx_hulls["convhull_area"])
 plot(x = cvx_hulls["Z"])
 ```
 
-We use `delineate_crowns()` with the `.stdtreemetrics` function to segment trees and extract metrics based on crown delineation.
+We use `crown_metrics()` with the `.stdtreemetrics` function to segment trees and extract metrics based on crown delineation.
 
 ## Exercises
 
